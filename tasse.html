@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini-jeu : Nettoyer la tasse</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f0f0f0;
+        font-family: Arial, sans-serif;
+        user-select: none;
+      }
+
+      h1 {
+        margin-bottom: 10px;
+      }
+
+      #game {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        background: #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      /* TASSE */
+      #cup {
+        position: absolute;
+        width: 180px;
+        height: 200px;
+        background: #fff;
+        border-radius: 0 0 20px 20px;
+        border: 5px solid #999;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      /* SALETÉ */
+      #dirt {
+        position: absolute;
+        inset: 0;
+        background: rgba(120, 80, 40, 0.8);
+        border-radius: 0 0 15px 15px;
+        pointer-events: none;
+      }
+
+      /* ÉPONGE */
+      #sponge {
+        position: absolute;
+        width: 70px;
+        height: 40px;
+        background: #f4e04d;
+        border-radius: 10px;
+        cursor: grab;
+      }
+
+      /* BARRE */
+      #progress-container {
+        width: 300px;
+        height: 20px;
+        background: #ccc;
+        border-radius: 10px;
+        margin-top: 15px;
+        overflow: hidden;
+      }
+
+      #progress {
+        height: 100%;
+        width: 0%;
+        background: #4caf50;
+        transition: width 0.2s;
+      }
+
+      #message {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>🧽 Nettoie la tasse</h1>
+    <p>Frotte avec l’éponge !</p>
+
+    <div id="game">
+      <div id="cup">
+        <div id="dirt"></div>
+      </div>
+      <div id="sponge"></div>
+    </div>
+
+    <div id="progress-container">
+      <div id="progress"></div>
+    </div>
+
+    <div id="message"></div>
+
+    <script>
+      const sponge = document.getElementById("sponge");
+      const cup = document.getElementById("cup");
+      const dirt = document.getElementById("dirt");
+      const progressBar = document.getElementById("progress");
+      const message = document.getElementById("message");
+
+      let isDragging = false;
+      let cleanPercent = 0;
+
+      sponge.style.left = "10px";
+      sponge.style.top = "10px";
+
+      sponge.addEventListener("mousedown", () => {
+        isDragging = true;
+        sponge.style.cursor = "grabbing";
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+        sponge.style.cursor = "grab";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging || cleanPercent >= 100) return;
+
+        const rect = document.getElementById("game").getBoundingClientRect();
+
+        const x = e.clientX - rect.left - sponge.offsetWidth / 2;
+        const y = e.clientY - rect.top - sponge.offsetHeight / 2;
+
+        sponge.style.left = x + "px";
+        sponge.style.top = y + "px";
+
+        // Collision éponge / tasse
+        const spongeRect = sponge.getBoundingClientRect();
+        const cupRect = cup.getBoundingClientRect();
+
+        if (
+          spongeRect.right > cupRect.left &&
+          spongeRect.left < cupRect.right &&
+          spongeRect.bottom > cupRect.top &&
+          spongeRect.top < cupRect.bottom
+        ) {
+          cleanPercent += 0.1;
+          cleanPercent = Math.min(cleanPercent, 100);
+
+          progressBar.style.width = cleanPercent + "%";
+          dirt.style.opacity = 1 - cleanPercent / 100;
+
+          if (cleanPercent >= 100) {
+            message.textContent = "🎉 La tasse est propre !";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
