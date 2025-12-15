@@ -14,7 +14,7 @@
     <h1>Escape Game</h1>
     <button id="playBtn">Jouer</button>
 
-    <div id="text-typing"></div>
+    <div class="text-typing"></div>
 
     <style>
       body {
@@ -41,7 +41,7 @@
         font-size: 16px;
       }
 
-      #text-typing {
+      .text-typing {
         color: white;
         font-size: 48px;
         text-align: center;
@@ -55,7 +55,7 @@
         .addEventListener("click", function (e) {
           e.preventDefault();
 
-          gsap.to("#text-typing", {
+          gsap.to(".text-typing", {
             duration: 2,
             text: "Bienvenue dans l'escape game...",
             ease: "none",
