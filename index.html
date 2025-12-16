@@ -2,12 +2,13 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <title>Cadenas numérique – MOODLE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escape game</title>
+    <link rel="stylesheet" href="css/porte-mmi.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
   </head>
@@ -16,9 +17,6 @@
     <header>
       <div id="timer">30:00</div>
     </header>
-
-    <h1>Porte entrée</h1>
-    <button id="startTimerBtn">Start Timer</button>
     <div class="text-typing text-typing-entree">
       <span class="text-content"></span>
       <svg width="20" height="20" viewBox="0 0 10 10" class="triangle-icon">
@@ -26,36 +24,29 @@
       </svg>
     </div>
 
-    <script>
-      gsap.set(".triangle", {
-        opacity: 0,
-      });
-      // Animation du texte
-      gsap.to(".text-content", {
-        duration: 2,
-        delay: 1,
-        text: "Tiens, j'avais jamais vu ces cadenas auparavant...",
-        ease: "none",
-        onComplete: function () {
-          // Une fois le texte fini, animer le triangle
-          gsap.to(".triangle", {
-            duration: 0.5,
-            opacity: 1,
-            y: 5,
-            repeat: -1, // répète en boucle
-            yoyo: true, // va-et-vient
-            ease: "sine.inOut",
-          });
-        },
-      });
+    <section class="lock-wrapper">
+      <div class="lock">
+        <div class="ticks" id="ticks"></div>
+        <canvas id="graduation"></canvas>
+        <canvas id="indicator"></canvas>
+        <div class="center" id="display">#</div>
+        <div class="input-wrapper">
+          <label for="codeInput">Code d'entrée :</label>
+          <input
+            type="text"
+            id="codeInput"
+            maxlength="7"
+            placeholder="_ _ _ _ _ _ _"
+          />
+          <div id="result"></div>
+        </div>
+      </div>
+      <a class="enter" href="hall-mmi.html">Entrer dans l'IUT</a>
+    </section>
 
-      // Masquer au clic
-      document
-        .querySelector(".text-typing-entree")
-        .addEventListener("click", function () {
-          this.style.display = "none";
-        });
-    </script>
+    <div class="spacer"></div>
+
+    <script src="js/porte-mmi.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

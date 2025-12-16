@@ -208,7 +208,7 @@ button {
   padding: 20px;
   font-size: 22px;
   display: flex;
-  position: absolute;
+  position: fixed;
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
@@ -220,6 +220,7 @@ button {
   justify-content: space-between;
   gap: 10px;
   cursor: pointer;
+  z-index: 999;
 }
 
 .text-content {
