@@ -1,20 +1,36 @@
-// inventory.js
-const INVENTORY_KEY = "inventory";
+// Charger inventaire depuis sessionStorage ou utiliser par défaut
+let Inventory = JSON.parse(sessionStorage.getItem("Inventory")) || {
+  items: ["sword", "shield", "potion"],
+};
 
-const defaultInventory = [
-  { name: "apples", quantity: 2 },
-  { name: "bananas", quantity: 0 },
-  { name: "cherries", quantity: 5 },
-];
+// Ré-attacher les méthodes à l'objet Inventory
+Inventory.addItem = function (item) {
+  this.items.push(item);
+  sessionStorage.setItem("Inventory", JSON.stringify(this));
+};
 
-function loadInventory() {
-  // sessionStorage au lieu de localStorage
-  return JSON.parse(sessionStorage.getItem(INVENTORY_KEY)) || defaultInventory;
-}
+Inventory.removeItem = function (item) {
+  const index = this.items.indexOf(item);
+  if (index > -1) {
+    this.items.splice(index, 1);
+    sessionStorage.setItem("Inventory", JSON.stringify(this));
+  }
+};
 
-function saveInventory(inventory) {
-  // sessionStorage au lieu de localStorage
-  sessionStorage.setItem(INVENTORY_KEY, JSON.stringify(inventory));
-}
+Inventory.listItems = function () {
+  return this.items;
+};
 
-console.log(defaultInventory);
+// Récupérer les éléments du DOM
+const barInventory = document.getElementById("inventory-bar");
+const button = document.getElementById("add-item-button");
+
+// Afficher l'inventaire
+barInventory.textContent = Inventory.listItems().join(", ");
+
+// Ajouter un objet
+button.addEventListener("click", () => {
+  const newItem = "Banane";
+  Inventory.addItem(newItem);
+  barInventory.textContent = Inventory.listItems().join(", ");
+});
