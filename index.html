@@ -1,172 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escape game</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #333;
-    }
-
-    p {
-      color: #666;
-    }
-
-    svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 80%;
-      transform: translate(-50%, -50%);
-    }
-
-    /* TIMER */
-    #timer {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #333;
-      background: #fff;
-      padding: 8px 12px;
-      border-radius: 5px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
-
-    button {
-      margin-top: 10px;
-    }
-    .cls-1 {
-      font-size: 7.54px;
-    }
-
-    .cls-1,
-    .cls-2,
-    .cls-3,
-    .cls-4,
-    .cls-5,
-    .cls-6 {
-      isolation: isolate;
-    }
-
-    .cls-1,
-    .cls-2,
-    .cls-3,
-    .cls-5,
-    .cls-6 {
-      font-family: Hitchcock, Hitchcock;
-    }
-
-    .cls-7 {
-      fill: #9fd7f4;
-    }
-
-    .cls-7,
-    .cls-8,
-    .cls-9,
-    .cls-10,
-    .cls-11 {
-      stroke: #000;
-      stroke-miterlimit: 10;
-    }
-
-    .cls-8 {
-      fill: #ccc;
-    }
-
-    .cls-9 {
-      fill: #fff;
-    }
-
-    .cls-2 {
-      font-size: 8.38px;
-    }
-
-    .cls-3 {
-      font-size: 8.62px;
-    }
-
-    .cls-5 {
-      font-size: 14.42px;
-    }
-
-    .cls-10 {
-      fill: #3fa9f5;
-    }
-
-    .cls-11 {
-      fill: #ff7bac;
-    }
-
-    .cls-6 {
-      font-size: 12px;
-    }
-  </style>
-
   <body>
     <!-- TIMER -->
-    <div id="timer">30:00</div>
+    <header>
+      <div id="timer">30:00</div>
+      <button id="mapBtn">Map</button>
+    </header>
 
     <h1>Welcome to the Escape Game!</h1>
     <p>Your adventure begins here. Solve puzzles and find clues to escape!</p>
-
-    <button id="mapBtn">Map</button>
     <button id="startTimerBtn">Start Timer</button>
-    <p id="result"></p>
+
 
     <script>
       const value = localStorage.getItem("userInput");
-      if (value) {
-        document.getElementById("result").textContent = value;
-      }
     </script>
 
     <svg
       style="display: none"
       xmlns="http://www.w3.org/2000/svg"
-      id="Calque_2"
+      id="map"
       data-name="Calque 2"
-      viewBox="0 0 671.6 395.31"
+      viewBox="0 0 671.6 300"
     >
       <g id="Calque_1-2" data-name="Calque 1">
-        <g id="BDE-Crous">
-          <polygon
-            class="cls-7"
-            points="640.72 347.85 640.72 325.07 571.67 325.07 571.67 347.85 515.74 347.85 515.74 394.81 671.1 394.81 671.1 347.85 640.72 347.85"
-          />
-          <polygon
-            class="cls-7"
-            points="586.28 312.72 586.28 279.73 571.5 279.73 571.5 325.07 586.28 325.07 651.18 325.07 651.18 347.85 671.1 347.85 671.1 325.07 671.1 322.28 671.1 312.72 586.28 312.72"
-          />
-          <rect
-            class="cls-7"
-            x="571.5"
-            y="229.25"
-            width="62.84"
-            height="50.49"
-          />
-          <g class="cls-4">
-            <text class="cls-6" transform="translate(593.42 369.65)">
-              <tspan x="0" y="0">Crous</tspan>
-            </text>
-          </g>
-          <g class="cls-4">
-            <text class="cls-6" transform="translate(589.4 257.51)">
-              <tspan x="0" y="0">BDE</tspan>
-            </text>
-          </g>
-        </g>
         <g id="Couloir-info">
           <rect
             class="cls-10"
@@ -240,26 +103,16 @@
             points="62.42 188.54 64.65 188.54 72 179.75 72 175.74 250.2 175.74 250.2 157.08 46.61 157.08 46.61 170.87 46.61 175.74 46.61 202.1 62.42 202.1 62.42 188.54"
           />
           <polygon
-            class="cls-10"
+            class="cls-10 amphi-info"
             points="161.72 189 161.72 188.4 161.72 175.74 75.77 176.38 75.71 176.43 72.55 176.5 72.45 179.2 72 179.59 65.21 188.4 62.02 188.4 62.02 277.26 161.72 277.26 161.72 189"
           />
-          <g class="cls-4">
+          <g class="cls-4 amphi-info">
             <text class="cls-6" transform="translate(85.73 233)">
               <tspan x="0" y="0">Amphi info</tspan>
             </text>
           </g>
         </g>
-        <g id="Rotonde">
-          <path
-            class="cls-9"
-            d="M368.78,338.41l-.79-65.23-30.28,13.22c-7.67-17.03-24.78-28.89-44.66-28.89s-38.6,13.01-45.69,31.34l-31.79-12.91v64.44l32.77-13.92c7.65,17.09,24.78,29,44.71,29s37.68-12.33,45.11-29.89l30.61,12.85h0Z"
-          />
-          <g class="cls-4">
-            <text class="cls-5" transform="translate(263.73 311.3)">
-              <tspan x="0" y="0">Rotonde</tspan>
-            </text>
-          </g>
-        </g>
+
         <g id="MMI">
           <rect class="cls-11" x="292.17" y=".5" width="51.72" height="82.76" />
           <rect class="cls-11" x="342.68" y=".5" width="51.72" height="82.76" />
@@ -357,7 +210,7 @@
             </text>
           </g>
           <g class="cls-4">
-            <g class="cls-4">
+            <g class="cls-4 salle-prof">
               <path
                 d="M527.9,182.57h-.77c-.26-.46-.67-.71-1.23-.77-.07,0-.22,0-.43-.02-.16,0-.28-.01-.36-.01-.21,0-.36.03-.45.08-.11.07-.16.19-.15.36.01.25.31.46.88.62.5.11,1,.22,1.5.33.38.09.65.31.81.65.09.21.14.44.14.7,0,.82-.66,1.23-1.97,1.23-.39-.02-.74-.08-1.05-.2-.73-.27-1.18-.74-1.35-1.41l.8-.03c.26.63.75.96,1.47,1.02.81,0,1.21-.21,1.21-.64,0-.4-.21-.66-.62-.78-.48-.1-.95-.2-1.43-.29-.49-.14-.85-.31-1.08-.54-.18-.17-.3-.41-.38-.7-.02-.08.05-.2.2-.35.18-.2.43-.35.76-.46.42-.15.91-.21,1.48-.2.42.03.77.1,1.06.21.7.25,1.02.65.97,1.21Z"
               />
@@ -445,45 +298,7 @@
         </g>
       </g>
     </svg>
-    <script>
-      const mapBtn = document.getElementById("mapBtn");
-      const img = document.querySelector("svg");
-      const timerDisplay = document.getElementById("timer");
-      const startTimerBtn = document.getElementById("startTimerBtn");
-      // MAP
-      mapBtn.addEventListener("click", () => {
-        img.style.display = img.style.display === "none" ? "block" : "none";
-      });
 
-      // TIMER (30 minutes countdown)
-      let timeLeft = 30 * 60; // 30 minutes en secondes
-      let timerInterval = null;
-
-      function updateTimer() {
-        const mins = String(Math.floor(timeLeft / 60)).padStart(2, "0");
-        const secs = String(timeLeft % 60).padStart(2, "0");
-        timerDisplay.textContent = `${mins}:${secs}`;
-      }
-
-      startTimerBtn.addEventListener("click", () => {
-        if (timerInterval !== null) return;
-
-        updateTimer(); // affiche 30:00 au démarrage
-
-        timerInterval = setInterval(() => {
-          timeLeft--;
-
-          updateTimer();
-
-          if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            timerDisplay.textContent = "00:00";
-            alert("⏰ Temps écoulé !");
-          }
-        }, 1000);
-      });
-    </script>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
