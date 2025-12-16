@@ -1,135 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escape game</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #333;
-    }
-
-    p {
-      color: #666;
-    }
-
-    svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 80%;
-      transform: translate(-50%, -50%);
-    }
-
-    /* TIMER */
-    #timer {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #333;
-      background: #fff;
-      padding: 8px 12px;
-      border-radius: 5px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
-
-    button {
-      margin-top: 10px;
-    }
-    .cls-1 {
-      font-size: 7.54px;
-    }
-
-    .cls-1,
-    .cls-2,
-    .cls-3,
-    .cls-4,
-    .cls-5,
-    .cls-6 {
-      isolation: isolate;
-    }
-
-    .cls-1,
-    .cls-2,
-    .cls-3,
-    .cls-5,
-    .cls-6 {
-      font-family: Hitchcock, Hitchcock;
-    }
-
-    .cls-7 {
-      fill: #9fd7f4;
-    }
-
-    .cls-7,
-    .cls-8,
-    .cls-9,
-    .cls-10,
-    .cls-11 {
-      stroke: #000;
-      stroke-miterlimit: 10;
-    }
-
-    .cls-8 {
-      fill: #ccc;
-    }
-
-    .cls-9 {
-      fill: #fff;
-    }
-
-    .cls-2 {
-      font-size: 8.38px;
-    }
-
-    .cls-3 {
-      font-size: 8.62px;
-    }
-
-    .cls-5 {
-      font-size: 14.42px;
-    }
-
-    .cls-10 {
-      fill: #3fa9f5;
-    }
-
-    .cls-11 {
-      fill: #ff7bac;
-    }
-
-    .cls-6 {
-      font-size: 12px;
-    }
-  </style>
-
   <body>
     <!-- TIMER -->
-    <div id="timer">30:00</div>
+    <header>
+      <div id="timer">30:00</div>
+      <button id="mapBtn">Map</button>
+    </header>
 
     <h1>Welcome to the Escape Game!</h1>
     <p>Your adventure begins here. Solve puzzles and find clues to escape!</p>
-
-    <button id="mapBtn">Map</button>
     <button id="startTimerBtn">Start Timer</button>
-    <p id="result"></p>
+
 
     <script>
       const value = localStorage.getItem("userInput");
-      if (value) {
-        document.getElementById("result").textContent = value;
-      }
     </script>
 
     <svg
@@ -213,10 +103,10 @@
             points="62.42 188.54 64.65 188.54 72 179.75 72 175.74 250.2 175.74 250.2 157.08 46.61 157.08 46.61 170.87 46.61 175.74 46.61 202.1 62.42 202.1 62.42 188.54"
           />
           <polygon
-            class="cls-10"
+            class="cls-10 amphi-info"
             points="161.72 189 161.72 188.4 161.72 175.74 75.77 176.38 75.71 176.43 72.55 176.5 72.45 179.2 72 179.59 65.21 188.4 62.02 188.4 62.02 277.26 161.72 277.26 161.72 189"
           />
-          <g class="cls-4">
+          <g class="cls-4 amphi-info">
             <text class="cls-6" transform="translate(85.73 233)">
               <tspan x="0" y="0">Amphi info</tspan>
             </text>
@@ -447,6 +337,8 @@
         }, 1000);
       });
     </script>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/header.js"></script>
+
   </body>
 </html>

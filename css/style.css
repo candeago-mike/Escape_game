@@ -1,0 +1,171 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+p {
+  color: #666;
+}
+
+svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+}
+
+/************ INVENTAIRE ***********/
+
+#inventory-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.inventory-item {
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border: 2px solid #999;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 12px;
+  text-align: center;
+}
+
+.inventory-item.empty {
+  opacity: 0.3;
+}
+
+.inventory-quantity {
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  background: #333;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+/******************* HEADER ****************/
+header {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+/* TIMER */
+#timer {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  margin-top: 10px;
+}
+
+/***** MAP STYLE *****/
+#mapBtn {
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+}
+
+/************************* MAP SVG *************************/
+.cls-1 {
+  font-size: 7.54px;
+}
+
+.cls-1,
+.cls-2,
+.cls-3,
+.cls-4,
+.cls-5,
+.cls-6 {
+  isolation: isolate;
+}
+
+.cls-1,
+.cls-2,
+.cls-3,
+.cls-5,
+.cls-6 {
+  font-family: Hitchcock, Hitchcock;
+}
+
+.cls-7 {
+  fill: #9fd7f4;
+}
+
+.cls-7,
+.cls-8,
+.cls-9,
+.cls-10,
+.cls-11 {
+  stroke: #000;
+  stroke-miterlimit: 10;
+}
+
+.cls-8 {
+  fill: #ccc;
+}
+
+.cls-9 {
+  fill: #fff;
+}
+
+.cls-2 {
+  font-size: 8.38px;
+}
+
+.cls-3 {
+  font-size: 8.62px;
+}
+
+.cls-5 {
+  font-size: 14.42px;
+}
+
+.cls-10 {
+  fill: #3fa9f5;
+}
+
+.cls-11 {
+  fill: #ff7bac;
+  cursor: pointer;
+  transition: fill 0.1s ease-in-out;
+}
+
+.cls-11:hover {
+  fill: yellow;
+}
+
+.amphi-info {
+  cursor: pointer;
+}
+#MMI text {
+  cursor: pointer;
+}
+
+.cls-6 {
+  font-size: 12px;
+}
