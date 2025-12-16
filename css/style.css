@@ -13,13 +13,30 @@ p {
   color: #666;
 }
 
-svg {
+/****** MAP *********/
+
+#map {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 80%;
-  transform: translate(-50%, -50%);
+
+  display: none;
+  opacity: 0;
+
+  transform-origin: center center;
+  transform: translate(-50%, -50%) scale(0.8);
+
+  transition: transform 0.3s ease, opacity 0.4s ease;
 }
+
+#map.show {
+  display: block;
+  opacity: 1;
+
+  transform: translate(-50%, -50%) scale(1);
+}
+
 
 /************ INVENTAIRE ***********/
 
@@ -155,17 +172,21 @@ button {
   transition: fill 0.1s ease-in-out;
 }
 
-.cls-11:hover {
+.cls-11:hover,
+.amphi-info:hover {
   fill: yellow;
 }
-
 .amphi-info {
   cursor: pointer;
+  transition: fill 0.1s ease-in-out;
 }
-#MMI text {
+#MMI text, .salle-prof {
   cursor: pointer;
+  pointer-events: none;
 }
-
+#Sous-sol-info text {
+  pointer-events: none;
+}
 .cls-6 {
   font-size: 12px;
 }

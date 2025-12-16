@@ -25,7 +25,7 @@
     <svg
       style="display: none"
       xmlns="http://www.w3.org/2000/svg"
-      id="Calque_2"
+      id="map"
       data-name="Calque 2"
       viewBox="0 0 671.6 300"
     >
@@ -210,7 +210,7 @@
             </text>
           </g>
           <g class="cls-4">
-            <g class="cls-4">
+            <g class="cls-4 salle-prof">
               <path
                 d="M527.9,182.57h-.77c-.26-.46-.67-.71-1.23-.77-.07,0-.22,0-.43-.02-.16,0-.28-.01-.36-.01-.21,0-.36.03-.45.08-.11.07-.16.19-.15.36.01.25.31.46.88.62.5.11,1,.22,1.5.33.38.09.65.31.81.65.09.21.14.44.14.7,0,.82-.66,1.23-1.97,1.23-.39-.02-.74-.08-1.05-.2-.73-.27-1.18-.74-1.35-1.41l.8-.03c.26.63.75.96,1.47,1.02.81,0,1.21-.21,1.21-.64,0-.4-.21-.66-.62-.78-.48-.1-.95-.2-1.43-.29-.49-.14-.85-.31-1.08-.54-.18-.17-.3-.41-.38-.7-.02-.08.05-.2.2-.35.18-.2.43-.35.76-.46.42-.15.91-.21,1.48-.2.42.03.77.1,1.06.21.7.25,1.02.65.97,1.21Z"
               />
@@ -298,47 +298,7 @@
         </g>
       </g>
     </svg>
-    <script>
-      const mapBtn = document.getElementById("mapBtn");
-      const img = document.querySelector("svg");
-      const timerDisplay = document.getElementById("timer");
-      const startTimerBtn = document.getElementById("startTimerBtn");
-      // MAP
-      mapBtn.addEventListener("click", () => {
-        img.style.display = img.style.display === "none" ? "block" : "none";
-      });
 
-      // TIMER (30 minutes countdown)
-      let timeLeft = 30 * 60; // 30 minutes en secondes
-      let timerInterval = null;
-
-      function updateTimer() {
-        const mins = String(Math.floor(timeLeft / 60)).padStart(2, "0");
-        const secs = String(timeLeft % 60).padStart(2, "0");
-        timerDisplay.textContent = `${mins}:${secs}`;
-      }
-
-      startTimerBtn.addEventListener("click", () => {
-        if (timerInterval !== null) return;
-
-        updateTimer(); // affiche 30:00 au démarrage
-
-        timerInterval = setInterval(() => {
-          timeLeft--;
-
-          updateTimer();
-
-          if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            timerDisplay.textContent = "00:00";
-            alert("⏰ Temps écoulé !");
-          }
-        }, 1000);
-      });
-    </script>
     <script src="js/script.js"></script>
-    <script src="js/header.js"></script>
-
   </body>
 </html>
