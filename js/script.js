@@ -3,28 +3,69 @@
 // const value = nameInput.value;
 // console.log(value);
 
-const mapBtn = document.getElementById("mapBtn");
-const imgMap = document.getElementById("map");
-const timerDisplay = document.getElementById("timer");
-const startTimerBtn = document.getElementById("startTimerBtn");
-// MAP
+const value = localStorage.getItem("userInput");
+
+const mapBtn   = document.getElementById("mapBtn");
+const mapModal = document.getElementById("mapModal");
+
 mapBtn.addEventListener("click", () => {
-  if (imgMap.classList.contains("show")) {
-    imgMap.classList.remove("show");
-
-    // attendre la fin de l'animation avant de cacher
-    setTimeout(() => {
-      imgMap.style.display = "none";
-    }, 400);
+  if (mapModal.classList.contains("show")) {
+    mapModal.classList.remove("show");
   } else {
-    imgMap.style.display = "block";
-
-    // petit délai pour déclencher la transition
-    setTimeout(() => {
-      imgMap.classList.add("show");
-    }, 10);
+    mapModal.classList.add("show");
   }
 });
+
+mapModal.addEventListener("click", (e) => {
+  if (e.target === mapModal) mapModal.classList.remove("show");
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") mapModal.classList.remove("show");
+});
+
+// Liens internes de la map
+const mapElements = mapModal.querySelectorAll(
+  'rect[class*="-map"], path[class*="-map"]'
+);
+
+mapElements.forEach((el) => {
+  const mapClass = Array.from(el.classList).find((c) => c.endsWith("-map"));
+  if (!mapClass) return;
+
+  const baseName = mapClass.replace(/-map$/, "");
+  el.style.cursor = "pointer";
+
+  el.addEventListener("click", () => {
+    window.location.href = `${baseName}.html`;
+  });
+});
+
+
+
+// Liens internes de la map (01f-map -> 01f.html, etc.)
+function initMapLinks() {
+  const mapElements = mapModal.querySelectorAll(
+    'rect[class*="-map"], path[class*="-map"]'
+  );
+
+  mapElements.forEach((el) => {
+    const mapClass = Array.from(el.classList).find((c) => c.endsWith("-map"));
+    if (!mapClass) return;
+
+    const baseName = mapClass.replace(/-map$/, ""); // "01f-map" -> "01f"
+    el.style.cursor = "pointer";
+
+    el.addEventListener("click", () => {
+      const targetUrl = `${baseName}.html`;
+      window.location.href = targetUrl;
+    });
+  });
+}
+
+
+const timerDisplay = document.getElementById("timer");
+const startTimerBtn = document.getElementById("startTimerBtn");
 
 // TIMER (30 minutes countdown)
 let timeLeft = 30 * 60; // 30 minutes en secondes

@@ -15,27 +15,6 @@ p {
 
 /****** MAP *********/
 
-#map {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 80%;
-
-  display: none;
-  opacity: 0;
-
-  transform-origin: center center;
-  transform: translate(-50%, -50%) scale(0.8);
-
-  transition: transform 0.3s ease, opacity 0.4s ease;
-}
-
-#map.show {
-  display: block;
-  opacity: 1;
-
-  transform: translate(-50%, -50%) scale(1);
-}
 
 
 /************ INVENTAIRE ***********/
@@ -83,6 +62,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: end;
+    z-index: 999;
 }
 
 /* TIMER */
@@ -105,6 +85,7 @@ button {
   border-radius: 100%;
   width: 50px;
   height: 50px;
+  cursor: pointer;
 }
 
 /************************* MAP SVG *************************/
@@ -180,13 +161,46 @@ button {
   cursor: pointer;
   transition: fill 0.1s ease-in-out;
 }
-#MMI text, .salle-prof {
+#MMI text,
+.salle-prof {
   cursor: pointer;
   pointer-events: none;
 }
-#Sous-sol-info text {
+#Sous-sol-info text, .couloirs-map {
   pointer-events: none;
 }
 .cls-6 {
   font-size: 12px;
 }
+
+/* MODAL MAP ultra simple */
+.map-modal {
+  position: fixed;
+  inset: 0;
+  display: none;           /* cachée par défaut */
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+  background: rgba(0, 0, 0, 0.6); /* pour voir le fond */
+}
+
+/* quand on affiche */
+.map-modal.show {
+  display: flex;           /* flex suffit, pas besoin de block */
+}
+
+/* état initial du SVG : centré, petit et transparent */
+.map-modal #map {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%) scale(0.7);
+  transition: transform 0.3s ease-out, scale 0.3s ease-out;
+}
+
+/* quand la modal est visible, on “zoom” */
+.map-modal.show #map {
+  transform: translate(-50%, -50%) scale(1);
+}
+
