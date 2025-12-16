@@ -15,8 +15,6 @@ p {
 
 /****** MAP *********/
 
-
-
 /************ INVENTAIRE ***********/
 
 #inventory-bar {
@@ -62,7 +60,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: end;
-    z-index: 999;
+  z-index: 999;
 }
 
 /* TIMER */
@@ -166,7 +164,8 @@ button {
   cursor: pointer;
   pointer-events: none;
 }
-#Sous-sol-info text, .couloirs-map {
+#Sous-sol-info text,
+.couloirs-map {
   pointer-events: none;
 }
 .cls-6 {
@@ -177,7 +176,7 @@ button {
 .map-modal {
   position: fixed;
   inset: 0;
-  display: none;           /* cachée par défaut */
+  display: none; /* cachée par défaut */
   align-items: center;
   justify-content: center;
   z-index: 998;
@@ -186,7 +185,7 @@ button {
 
 /* quand on affiche */
 .map-modal.show {
-  display: flex;           /* flex suffit, pas besoin de block */
+  display: flex; /* flex suffit, pas besoin de block */
 }
 
 /* état initial du SVG : centré, petit et transparent */
@@ -204,3 +203,38 @@ button {
   transform: translate(-50%, -50%) scale(1);
 }
 
+.text-typing {
+  background-color: black;
+  padding: 20px 20px;
+  font-size: 22px;
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center; 
+  width: 600px;
+  color: white;
+  height: 50px;
+  align-items: flex-start;
+}
+
+.text-typing-entree {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.triangle-icon {
+  flex-shrink: 0;
+}
+.text-typing svg {
+  overflow: visible;
+}

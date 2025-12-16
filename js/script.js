@@ -3,9 +3,11 @@
 // const value = nameInput.value;
 // console.log(value);
 
+
+
 const value = localStorage.getItem("userInput");
 
-const mapBtn   = document.getElementById("mapBtn");
+const mapBtn = document.getElementById("mapBtn");
 const mapModal = document.getElementById("mapModal");
 
 mapBtn.addEventListener("click", () => {
@@ -41,8 +43,6 @@ mapElements.forEach((el) => {
   });
 });
 
-
-
 // Liens internes de la map (01f-map -> 01f.html, etc.)
 function initMapLinks() {
   const mapElements = mapModal.querySelectorAll(
@@ -62,7 +62,6 @@ function initMapLinks() {
     });
   });
 }
-
 
 const timerDisplay = document.getElementById("timer");
 const startTimerBtn = document.getElementById("startTimerBtn");
