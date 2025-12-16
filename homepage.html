@@ -13,6 +13,16 @@
   <body>
     <h1>Escape Game</h1>
     <button id="playBtn">Jouer</button>
+    <input type="text" id="nameInput" placeholder="Entre un texte" />
+    <button id="saveBtn">Valider</button>
+
+    <script>
+      document.getElementById("saveBtn").addEventListener("click", () => {
+        const value = document.getElementById("nameInput").value;
+        localStorage.setItem("userInput", value);
+        window.location.href = "index.html";
+      });
+    </script>
 
     <div class="text-typing"></div>
 
@@ -67,5 +77,6 @@
           });
         });
     </script>
+    <script src="script.js"></script>
   </body>
 </html>

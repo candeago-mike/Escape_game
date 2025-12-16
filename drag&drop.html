@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Drag & Drop - Escape Game</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #1e1e2f;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        background: #2a2a40;
+        border-radius: 12px;
+      }
+
+      .square {
+        width: 80px;
+        height: 80px;
+        background: #4caf50;
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        cursor: grab;
+        border-radius: 8px;
+        transition: box-shadow 0.2s, transform 0.2s;
+      }
+
+      .square:active {
+        cursor: grabbing;
+      }
+
+      /* ✨ Surbrillance du carré */
+      .square.highlight {
+        box-shadow: 0 0 20px #00ff99;
+        transform: scale(1.05);
+      }
+
+      .target {
+        width: 100px;
+        height: 100px;
+        border: 3px dashed #ffffff88;
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="square" id="square"></div>
+      <div class="target" id="target"></div>
+    </div>
+
+    <script>
+      const square = document.getElementById("square");
+      const target = document.getElementById("target");
+
+      let offsetX = 0;
+      let offsetY = 0;
+      const startPosition = { x: square.offsetLeft, y: square.offsetTop };
+
+      square.addEventListener("mousedown", (e) => {
+        offsetX = e.clientX - square.offsetLeft;
+        offsetY = e.clientY - square.offsetTop;
+
+        document.addEventListener("mousemove", moveSquare);
+        document.addEventListener("mouseup", dropSquare);
+      });
+
+      function moveSquare(e) {
+        square.style.left = e.clientX - offsetX + "px";
+        square.style.top = e.clientY - offsetY + "px";
+
+        checkHighlight();
+      }
+
+      function checkHighlight() {
+        const squareRect = square.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+
+        const isOverTarget =
+          squareRect.left < targetRect.right &&
+          squareRect.right > targetRect.left &&
+          squareRect.top < targetRect.bottom &&
+          squareRect.bottom > targetRect.top;
+
+        square.classList.toggle("highlight", isOverTarget);
+      }
+
+      function dropSquare() {
+        document.removeEventListener("mousemove", moveSquare);
+        document.removeEventListener("mouseup", dropSquare);
+
+        const squareRect = square.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+
+        const isInside =
+          squareRect.left >= targetRect.left &&
+          squareRect.right <= targetRect.right &&
+          squareRect.top >= targetRect.top &&
+          squareRect.bottom <= targetRect.bottom;
+
+        square.classList.remove("highlight");
+
+        if (isInside) {
+          console.log("bien jouer bb");
+        } else {
+          square.style.left = startPosition.x + "px";
+          square.style.top = startPosition.y + "px";
+        }
+      }
+    </script>
+  </body>
+</html>

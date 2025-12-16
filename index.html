@@ -123,6 +123,15 @@
 
     <button id="mapBtn">Map</button>
     <button id="startTimerBtn">Start Timer</button>
+    <p id="result"></p>
+
+    <script>
+      const value = localStorage.getItem("userInput");
+      if (value) {
+        document.getElementById("result").textContent = value;
+      }
+    </script>
+
     <svg
       style="display: none"
       xmlns="http://www.w3.org/2000/svg"
@@ -441,7 +450,6 @@
       const img = document.querySelector("svg");
       const timerDisplay = document.getElementById("timer");
       const startTimerBtn = document.getElementById("startTimerBtn");
-
       // MAP
       mapBtn.addEventListener("click", () => {
         img.style.display = img.style.display === "none" ? "block" : "none";
@@ -476,5 +484,6 @@
         }, 1000);
       });
     </script>
+    <script src="script.js"></script>
   </body>
 </html>

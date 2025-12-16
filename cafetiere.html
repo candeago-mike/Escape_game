@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Escape Game - Café</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #1e1e2f;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .game {
+        background: #2a2a40;
+        padding: 30px;
+        border-radius: 12px;
+        width: 350px;
+        text-align: center;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      .sizes {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .size-btn {
+        flex: 1;
+        margin: 0 5px;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #444;
+        color: white;
+        font-size: 16px;
+      }
+
+      .size-btn.active {
+        background: #4caf50;
+      }
+
+      .points {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 0 20px;
+      }
+
+      .point {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #555;
+        cursor: pointer;
+      }
+
+      .point.active {
+        background: gold;
+      }
+
+      button.validate {
+        padding: 10px 20px;
+        border: none;
+        background: #2196f3;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+
+      .message {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      .win {
+        color: #00ff99;
+      }
+
+      .lose {
+        color: #ff6b6b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game">
+      <h1>☕ Préparer le café</h1>
+
+      <p>Taille du café</p>
+      <div class="sizes">
+        <button class="size-btn" onclick="selectSize('petit', this)">
+          Petit
+        </button>
+        <button class="size-btn" onclick="selectSize('moyen', this)">
+          Moyen
+        </button>
+        <button class="size-btn" onclick="selectSize('grand', this)">
+          Grand
+        </button>
+      </div>
+
+      <p>Dose de sucre</p>
+      <div class="points" id="sugar"></div>
+
+      <p>Dose de lait</p>
+      <div class="points" id="milk"></div>
+
+      <button class="validate" onclick="checkWin()">Valider</button>
+
+      <div class="message" id="message"></div>
+    </div>
+
+    <script>
+      let selectedSize = "";
+      let sugarDose = 0;
+      let milkDose = 0;
+
+      function selectSize(size, button) {
+        selectedSize = size;
+        document
+          .querySelectorAll(".size-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+      }
+
+      function createPoints(containerId, callback) {
+        const container = document.getElementById(containerId);
+        for (let i = 1; i <= 5; i++) {
+          const point = document.createElement("div");
+          point.classList.add("point");
+          point.addEventListener("click", () => {
+            callback(i);
+            updatePoints(container, i);
+          });
+          container.appendChild(point);
+        }
+      }
+
+      function updatePoints(container, count) {
+        [...container.children].forEach((point, index) => {
+          point.classList.toggle("active", index < count);
+        });
+      }
+
+      createPoints("sugar", (value) => (sugarDose = value));
+      createPoints("milk", (value) => (milkDose = value));
+
+      function checkWin() {
+        const message = document.getElementById("message");
+
+        if (selectedSize === "moyen" && sugarDose === 5 && milkDose === 2) {
+          message.textContent = "🎉 Bravo ! Le café est parfait, tu as gagné !";
+          message.className = "message win";
+        } else {
+          message.textContent = "❌ Mauvaise combinaison... Réessaie.";
+          message.className = "message lose";
+        }
+      }
+    </script>
+  </body>
+</html>
