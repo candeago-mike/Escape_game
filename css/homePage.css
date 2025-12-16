@@ -32,15 +32,32 @@ input {
   align-items: center;
 }
 
-.text-typing-start {
+.text-typing {
   background-color: black;
+  padding: 20px;
   font-size: 22px;
+  display: flex;
   position: absolute;
   bottom: 50px;
-  display: flex;
-  max-width: 600px;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
+  width: 600px;
   color: white;
   height: 50px;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.triangle-icon {
+  flex-shrink: 0;
+}
+.text-typing svg {
+  overflow: visible;
 }

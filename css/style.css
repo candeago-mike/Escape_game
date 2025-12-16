@@ -205,26 +205,20 @@ button {
 
 .text-typing {
   background-color: black;
-  padding: 20px 20px;
+  padding: 20px;
   font-size: 22px;
   display: flex;
   position: absolute;
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  text-align: center; 
+  text-align: center;
   width: 600px;
   color: white;
   height: 50px;
-  align-items: flex-start;
-}
-
-.text-typing-entree {
-  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 20px;
   cursor: pointer;
 }
 
@@ -237,4 +231,12 @@ button {
 }
 .text-typing svg {
   overflow: visible;
+}
+
+
+
+/****** 03 F ******/
+
+.salle-03-f {
+  background-color: black;
 }

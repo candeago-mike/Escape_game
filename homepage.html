@@ -17,8 +17,16 @@
       <button id="playBtn">Jouer</button>
     </div>
 
-    <div class="text-typing text-typing-start"></div>
+    <div class="text-typing text-typing-start">
+      <span class="text-content"></span>
+      <svg width="20" height="20" viewBox="0 0 10 10" class="triangle-icon">
+        <polygon points="0,0 10,0 5,10" fill="white" class="triangle" />
+      </svg>
+    </div>
     <script>
+      gsap.set(".triangle", {
+        opacity: 0,
+      });
       document
         .getElementById("playBtn")
         .addEventListener("click", function (e) {
@@ -27,22 +35,36 @@
             opacity: 0,
             duration: 2,
           });
-          gsap.to(".text-typing-start", {
-            delay: 3,
+          gsap.to(".text-content", {
             duration: 2,
-            text: "17:30 - Mince ! Mon PC ! Je l’ai oublié à l’IUT. J’espère que Fatima est encore là, je vais aller voir... ”",
+            delay: 1,
+            text: "17:30 Mince ! Mon PC ! Je l’ai oublié à l’IUT. J’espère que Fatima est encore là, je vais aller voir...",
             ease: "none",
-          });
-          gsap.to(".text-typing-start", {
-            delay:8,
-            opacity: 0,
-            duration: 1,
             onComplete: function () {
-              setTimeout(function () {
-                window.location.href = "index.html";
-              }, 1000);
+              // Une fois le texte fini, animer le triangle
+              gsap.to(".triangle", {
+                duration: 0.5,
+                opacity: 1,
+                y: 5,
+                repeat: -1, // répète en boucle
+                yoyo: true, // va-et-vient
+                ease: "sine.inOut",
+              });
             },
           });
+          // Masquer au clic
+          document
+            .querySelector(".text-typing")
+            .addEventListener("click", function () {
+              gsap.to(".text-typing", {
+                duration: 2,
+                opacity: 0,
+                ease: "none",
+                onComplete: function () {
+                  window.location.href = "index.html";
+                },
+              });
+            });
         });
     </script>
     <script src="script.js"></script>

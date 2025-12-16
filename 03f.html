@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
   </head>
-  <body>
+  <body class="salle-03-f">
     <header>
       <div id="timer">30:00</div>
       <button id="mapBtn">Map</button>
@@ -333,8 +333,7 @@
       </svg>
     </div>
 
-    <h1>Hall MMI</h1>
-    <div class="text-typing text-typing-hall">
+    <div class="text-typing text-typing-03f">
       <span class="text-content"></span>
       <svg width="20" height="20" viewBox="0 0 10 10" class="triangle-icon">
         <polygon points="0,0 10,0 5,10" fill="white" class="triangle" />
@@ -349,7 +348,7 @@
       gsap.to(".text-content", {
         duration: 2,
         delay: 1,
-        text: "La porte était fermée mais il semble y avoir quelqu’un...",
+        text: "Il semble y avoir une coupure de courant.",
         ease: "none",
         onComplete: function () {
           // Une fois le texte fini, animer le triangle
@@ -366,7 +365,7 @@
 
       // Masquer au clic
       document
-        .querySelector(".text-typing-hall")
+        .querySelector(".text-typing-03f")
         .addEventListener("click", function () {
           this.style.display = "none";
         });
