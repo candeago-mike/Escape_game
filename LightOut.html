@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Énigme Interrupteurs</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #222;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      #grid {
+        display: grid;
+        grid-template-columns: repeat(4, 60px);
+        grid-template-rows: repeat(4, 60px);
+        gap: 10px;
+      }
+
+      .switch {
+        width: 60px;
+        height: 60px;
+        background-color: #555;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .switch.on {
+        background-color: #ff0;
+      }
+
+      #message {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Allume tous les interrupteurs !</h1>
+    <div id="grid"></div>
+    <div id="message"></div>
+
+    <script>
+      const gridSize = 4;
+      const grid = document.getElementById("grid");
+      const message = document.getElementById("message");
+
+      // Créer les interrupteurs
+      const switches = [];
+      for (let i = 0; i < gridSize * gridSize; i++) {
+        const btn = document.createElement("div");
+        btn.classList.add("switch");
+        grid.appendChild(btn);
+        switches.push(btn);
+      }
+
+      // Retourner un interrupteur
+      function toggleSwitch(index) {
+        if (index < 0 || index >= switches.length) return;
+        switches[index].classList.toggle("on");
+      }
+
+      // Cliquer sur un interrupteur
+      switches.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          const row = Math.floor(index / gridSize);
+          const col = index % gridSize;
+
+          // Interrupteur cliqué
+          toggleSwitch(index);
+
+          // Voisins : haut, bas, gauche, droite
+          toggleSwitch(index - gridSize); // haut
+          toggleSwitch(index + gridSize); // bas
+          if (col > 0) toggleSwitch(index - 1); // gauche
+          if (col < gridSize - 1) toggleSwitch(index + 1); // droite
+
+          checkWin();
+        });
+      });
+
+      function checkWin() {
+        if (switches.every((s) => s.classList.contains("on"))) {
+          message.textContent =
+            "🎉 Bravo ! Tous les interrupteurs sont allumés !";
+        } else {
+          message.textContent = "";
+        }
+      }
+    </script>
+  </body>
+</html>
