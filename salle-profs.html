@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hall MMI</title>
+    <title>Salle des Profs</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/salle-profs.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -332,46 +333,27 @@
         </g>
       </svg>
     </div>
-
-    <div class="text-typing text-typing-03f">
+    <div class="text-typing text-typing-the-flop">
+      <p class="autor">M. Dubois -</p>
       <span class="text-content"></span>
-      <svg width="20" height="20" viewBox="0 0 10 10" class="triangle-icon">
-        <polygon points="0,0 10,0 5,10" fill="white" class="triangle" />
+      <svg width="20" height="20" viewBox="0 0 20 20" class="triangle-icon">
+        <polygon points="0,0 20,0 10,20" fill="white" class="triangle" />
       </svg>
     </div>
-    <svg class="light" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="8" cy="8" r="6" />
-    </svg>
-    <script>
-      gsap.set(".triangle", {
-        opacity: 0,
-      });
-      // Animation du texte
-      gsap.to(".text-content", {
-        duration: 2,
-        delay: 1,
-        text: "Il semble y avoir une coupure de courant.",
-        ease: "none",
-        onComplete: function () {
-          // Une fois le texte fini, animer le triangle
-          gsap.to(".triangle", {
-            duration: 0.5,
-            opacity: 1,
-            y: 5,
-            repeat: -1, // répète en boucle
-            yoyo: true, // va-et-vient
-            ease: "sine.inOut",
-          });
-        },
-      });
 
-      // Masquer au clic
-      document
-        .querySelector(".text-typing-03f")
-        .addEventListener("click", function () {
-          this.style.display = "none";
-        });
-    </script>
+    <button id="replayBtn" style="display: none">
+      Vous vouliez quoi comme thé, déjà ?
+    </button>
+
+    <div class="text-typing-merci">
+      <p class="autor">M. Dubois -</p>
+      <span class="text-content"></span>
+      <svg width="20" height="20" viewBox="0 0 20 20" class="triangle-icon">
+        <polygon points="0,0 20,0 10,20" fill="white" class="triangle" />
+      </svg>
+    </div>
+
+    <script src="js/salle-profs.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
