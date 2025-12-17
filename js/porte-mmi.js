@@ -168,3 +168,13 @@ input.addEventListener("input", () => {
     enter.classList.add("visible");
   }
 });
+
+const clickZone = document.querySelector(".click-zone");
+const cadena = document.querySelector(".Cadena");
+clickZone.addEventListener("mouseenter", () => {
+  cadena.classList.add("glow");
+});
+
+clickZone.addEventListener("mouseleave", () => {
+  cadena.classList.remove("glow");
+});
