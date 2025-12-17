@@ -1,0 +1,10 @@
+.fond {
+    z-index: -1;
+}
+
+.eponge {
+    z-index: 1;
+}
+.cafetiere {
+    z-index: 1;
+}

@@ -44,13 +44,29 @@
 .text-typing {
   width: 680px;
   padding: 20px 0px;
-}
-
-.text-typing-merci {
   background-color: black;
   padding: 20px;
   font-size: 22px;
   display: flex;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  height: 50px;
+  border: 1px solid #fff;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.text-typing-merci {
+  background-color: black;
+  display:none;
+  padding: 20px;
+  font-size: 22px;
   position: fixed;
   bottom: 50px;
   left: 50%;
