@@ -1,14 +1,38 @@
+const video = document.querySelector(".backgroundVideo");
+
+
 gsap.set(".triangle", {
   opacity: 0,
 });
 gsap.set(".text-typing", {
   opacity: 0,
 });
+gsap.set(".backgroundVideo", {
+  opacity: 0,
+});
 document.getElementById("playBtn").addEventListener("click", function (e) {
+  // lancer la vidéo
+  if (video) {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((err) => {
+        console.error("Erreur lecture vidéo :", err);
+      });
+    }
+  }
+
   e.preventDefault();
   gsap.to(".start", {
     opacity: 0,
     duration: 1,
+  });
+  gsap.to(".background", {
+    duration: 1,
+    opacity: 0,
+  });
+  gsap.to(".backgroundVideo", {
+    duration: 1,
+    opacity: 1,
   });
   gsap.to(".text-typing", {
     opacity: 1,
@@ -31,6 +55,7 @@ document.getElementById("playBtn").addEventListener("click", function (e) {
       });
     },
   });
+
   // Masquer au clic
   document.querySelector(".text-typing").addEventListener("click", function () {
     gsap.to(".text-typing", {
