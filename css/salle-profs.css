@@ -8,11 +8,12 @@
 #replayBtn,
 .bouton-style {
   position: absolute;
-  bottom: 200px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #000;
   color: #fff;
+  z-index: 5;
   padding: 10px 15px;
   font-size: 18px;
   cursor: pointer;
@@ -20,7 +21,7 @@
   border-radius: 999px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* halo léger */
   transition: transform 0.2s ease-out, box-shadow 0.2s ease-out,
-    background-color 0.2s ease-out;
+  background-color 0.2s ease-out;
 }
 
 /* hover : le bouton se lève et la lumière augmente */
@@ -34,11 +35,12 @@
 
 .autor {
   position: absolute;
-  bottom: 90px;
+  bottom: 130px;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
   text-align: center;
+  color: white;
 }
 
 .text-typing {
@@ -54,7 +56,7 @@
   transform: translateX(-50%);
   text-align: center;
   color: white;
-  height: 50px;
+  height: 80px;
   border: 1px solid #fff;
   align-items: center;
   justify-content: space-between;
@@ -81,4 +83,14 @@
   cursor: pointer;
   font-family: "Orbitron", sans-serif;
   z-index: 997;
+}
+
+.dubois-tasse {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
 }

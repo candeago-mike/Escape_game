@@ -75,16 +75,13 @@ function goNext() {
     // premier clic/Enter sur la dernière → marquer comme fini + montrer le bouton
     finishedAll = true;
     replayBtn.style.display = "inline-block";
+    bubble.style.display = "none";
+
     gsap.fromTo(
       replayBtn,
       { opacity: 0, y: 10 },
       { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
     );
-  } else {
-    // deuxième clic/Enter sur la dernière → tu peux fermer la bulle ou autre
-    bubble.style.display = "none";
-    // ou lancer une redirection ici si tu veux :
-    // window.location.href = "index.html";
   }
 }
 
@@ -98,9 +95,12 @@ document.addEventListener("keydown", (e) => {
 // replay
 replayBtn.addEventListener("click", () => {
   replayBtn.style.display = "none";
-  bubble.style.display = "block";
-  gsap.set(triangle, { opacity: 0, y: 0 });
-  currentIndex = 0;
+  bubble.style.display = "flex";
+
+  // on laisse le triangle comme il est, pas besoin de le reset
+  // gsap.set(triangle, { opacity: 0, y: 0 });
+
+  currentIndex = 1; // reprendre à la consigne 1 (deuxième message)
   finishedAll = false;
   showMessage(currentIndex);
 });
