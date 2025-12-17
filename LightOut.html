@@ -165,56 +165,55 @@
       <div class="click-zone" data-index="15"></div>
     </div>
   </body>
-<script>
-  const zones = document.querySelectorAll(".click-zone");
-  const switches = document.querySelectorAll(".disjoncteur");
-  const message = document.getElementById("message");
+  <script>
+    const zones = document.querySelectorAll(".click-zone");
+    const switches = document.querySelectorAll(".disjoncteur");
+    const message = document.getElementById("message");
 
-  const GRID_SIZE = 4;
-  let state = Array(switches.length).fill(false);
-  // false = image visible (éteint)
-  // true = image cachée (allumé)
+    const GRID_SIZE = 4;
+    let state = Array(switches.length).fill(false);
+    // false = image visible (éteint)
+    // true = image cachée (allumé)
 
-  function toggle(index) {
-    if (index < 0 || index >= state.length) return;
-    state[index] = !state[index];
-    switches[index].style.display = state[index] ? "none" : "block";
-  }
-
-  function toggleWithNeighbors(index) {
-    const row = Math.floor(index / GRID_SIZE);
-    const col = index % GRID_SIZE;
-
-    // lui-même
-    toggle(index);
-
-    // gauche
-    if (col > 0) toggle(index - 1);
-
-    // droite
-    if (col < GRID_SIZE - 1) toggle(index + 1);
-
-    // haut
-    if (row > 0) toggle(index - GRID_SIZE);
-
-    // bas
-    if (row < GRID_SIZE - 1) toggle(index + GRID_SIZE);
-  }
-
-  zones.forEach(zone => {
-    zone.addEventListener("click", () => {
-      const index = parseInt(zone.dataset.index);
-      toggleWithNeighbors(index);
-      checkWin();
-    });
-  });
-
-  function checkWin() {
-    if (state.every(v => v === true)) {
-      message.textContent = "🎉 Bien joué bb !";
-      console.log("bien joué bb");
+    function toggle(index) {
+      if (index < 0 || index >= state.length) return;
+      state[index] = !state[index];
+      switches[index].style.display = state[index] ? "none" : "block";
     }
-  }
-</script>
 
+    function toggleWithNeighbors(index) {
+      const row = Math.floor(index / GRID_SIZE);
+      const col = index % GRID_SIZE;
+
+      // lui-même
+      toggle(index);
+
+      // gauche
+      if (col > 0) toggle(index - 1);
+
+      // droite
+      if (col < GRID_SIZE - 1) toggle(index + 1);
+
+      // haut
+      if (row > 0) toggle(index - GRID_SIZE);
+
+      // bas
+      if (row < GRID_SIZE - 1) toggle(index + GRID_SIZE);
+    }
+
+    zones.forEach((zone) => {
+      zone.addEventListener("click", () => {
+        const index = parseInt(zone.dataset.index);
+        toggleWithNeighbors(index);
+        checkWin();
+      });
+    });
+
+    function checkWin() {
+      if (state.every((v) => v === true)) {
+        message.textContent = "🎉 Bien joué bb !";
+        console.log("bien joué bb");
+      }
+    }
+  </script>
 </html>

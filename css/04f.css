@@ -17,22 +17,18 @@
   object-fit: cover;
   z-index: 1;
 }
-.journal {
+.click-zone {
+  width: 140px;
+  height: 60px;
   position: absolute;
-  top: 70%;
-  left: 40%;
-  width: 150px;
-  height: 100px;
-  object-fit: contain;
-  z-index: 2;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0); /* halo léger */
-  transition: box-shadow 0.2s ease-out;
+  top: 76%;
+  left: 35%;
+  z-index: 100;
 }
-
-.journal:hover {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
-    0 0 40px rgba(255, 255, 255, 0.6);
+.glow {
+  filter: drop-shadow(0 0 6px #0f0) drop-shadow(0 0 12px #0f0)
+    drop-shadow(0 0 20px #0f0);
+  cursor: pointer;
 }
 
 #book {
