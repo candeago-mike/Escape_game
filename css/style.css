@@ -220,7 +220,7 @@ button {
   justify-content: space-between;
   gap: 10px;
   cursor: pointer;
-  z-index: 999;
+  z-index: 997;
 }
 
 .text-content {
@@ -240,4 +240,28 @@ button {
 
 .salle-03-f {
   background-color: black;
+}
+.light {
+  position: absolute;
+  top: 30%;
+  right: 30%;
+  cursor: pointer;
+}
+.light circle {
+  fill: white;
+  transition: fill 0.2s linear;
+  animation: blinkFill 1s ease-in-out infinite;
+}
+
+/* animation blanc ↔ rouge */
+@keyframes blinkFill {
+  0% {
+    fill: white;
+  }
+  50% {
+    fill: red;
+  }
+  100% {
+    fill: white;
+  }
 }
