@@ -41,15 +41,9 @@ pages.forEach((pageEl) => {
   }
 });
 
-const journal = document.querySelector(".journal");
+const journal = document.getElementById("journal");
 const bookContainer = document.querySelector(".book-container");
 const book = document.getElementById("book");
-
-// ouvrir au clic sur le journal
-journal.addEventListener("click", (e) => {
-  e.stopPropagation(); // ne pas déclencher le handler global
-  bookContainer.style.display = "flex";
-});
 
 // ne pas fermer quand on clique dans le livre
 book.addEventListener("click", (e) => {
@@ -59,4 +53,20 @@ book.addEventListener("click", (e) => {
 // fermer quand on clique ailleurs
 document.addEventListener("click", () => {
   bookContainer.style.display = "none";
+});
+
+const clickZone = document.querySelector(".click-zone");
+
+clickZone.addEventListener("mouseenter", () => {
+  journal.classList.add("glow");
+});
+
+clickZone.addEventListener("mouseleave", () => {
+  journal.classList.remove("glow");
+});
+
+// ouvrir le livre au clic sur la zone
+clickZone.addEventListener("click", (e) => {
+  e.stopPropagation(); // pour ne pas fermer immédiatement
+  bookContainer.style.display = "flex";
 });
