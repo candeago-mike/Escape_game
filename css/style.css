@@ -216,6 +216,7 @@ button {
   width: 600px;
   color: white;
   height: 50px;
+  border: 1px solid #fff;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
@@ -233,8 +234,6 @@ button {
 .text-typing svg {
   overflow: visible;
 }
-
-
 
 /****** 03 F ******/
 
@@ -264,4 +263,14 @@ button {
   100% {
     fill: white;
   }
+}
+
+.background {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }

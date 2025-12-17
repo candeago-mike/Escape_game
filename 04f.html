@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Salle 03 F</title>
+    <title>Salle 04 F</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/04f.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -16,6 +17,10 @@
       <div id="timer">30:00</div>
       <button id="mapBtn">Map</button>
     </header>
+
+    <img class="background" src="img/04f.jpg">
+    <img class="journal" src="img/Carnetcrop.png">
+
     <div id="mapModal" class="map-modal">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -333,59 +338,22 @@
       </svg>
     </div>
 
-    <div class="text-typing text-typing-03f">
-      <span class="text-content"></span>
-      <svg width="20" height="20" viewBox="0 0 10 10" class="triangle-icon">
-        <polygon points="0,0 10,0 5,10" fill="white" class="triangle" />
-      </svg>
+    <div class="book-container" style="display:none">
+      <div id="book">
+        <div id="end"></div>
+        <div class="page one">
+          <div class="image front image3"></div>
+          <div class="image back image4"></div>
+        </div>
+
+        <div class="page two">
+          <div class="image front image1"></div>
+          <div class="image back image2"></div>
+        </div>
+      </div>
     </div>
-    <svg
-      class="light"
-      width="16"
-      height="16"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle cx="8" cy="8" r="6" />
-    </svg>
-    <script>
-      gsap.set(".triangle", {
-        opacity: 0,
-      });
-      // Animation du texte
-      gsap.to(".text-content", {
-        duration: 2,
-        delay: 1,
-        text: "Il semble y avoir une coupure de courant.",
-        ease: "none",
-        onComplete: function () {
-          // Une fois le texte fini, animer le triangle
-          gsap.to(".triangle", {
-            duration: 0.5,
-            opacity: 1,
-            y: 5,
-            repeat: -1, // répète en boucle
-            yoyo: true, // va-et-vient
-            ease: "sine.inOut",
-          });
-        },
-      });
 
-      // Masquer au clic
-      const bubble = document.querySelector(".text-typing-03f");
-
-      bubble.addEventListener("click", function () {
-        if (!canHide) return;
-        this.style.display = "none";
-      });
-
-      // Masquer à la touche Entrée
-      document.addEventListener("keydown", function (event) {
-        if (!canHide) return;
-        if (event.key === "Enter") {
-          bubble.style.display = "none";
-        }
-      });
-    </script>
     <script src="js/script.js"></script>
+    <script src="js/04f.js"></script>
   </body>
 </html>
