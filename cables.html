@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle des Câbles</title>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .section {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .cable {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+
+      .cable.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      img {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .cableseul {
+        z-index: 10;
+        transition: 0.3s;
+        filter: none;
+      }
+
+      .cableseul.glow {
+        filter: drop-shadow(0 0 6px #00ff00) drop-shadow(0 0 12px #00ff00)
+          drop-shadow(0 0 20px #00ff00);
+      }
+
+      .click-zone {
+        position: absolute;
+        z-index: 20;
+        cursor: pointer;
+      }
+
+      /* DEBUG VISUEL (désactiver quand terminé) */
+
+      /* .click-zone {
+        background: rgba(0, 255, 0, 0.25);
+      } */
+    </style>
+  </head>
+
+  <body>
+    <div class="section">
+      <!-- CÂBLE 1 -->
+      <div class="cable active">
+        <img src="img/cables/1.png" />
+        <img class="cableseul" src="img/cables/C1.png" />
+
+        <div
+          class="click-zone"
+          style="top: 63%; left: 50%; width: 60px; height: 120px"
+        ></div>
+      </div>
+
+      <!-- CÂBLE 2 -->
+      <div class="cable">
+        <img src="img/cables/2.png" />
+        <img class="cableseul" src="img/cables/C2.png" />
+
+        <div
+          class="click-zone"
+          style="top: 60%; left: 40%; width: 230px; height: 150px"
+        ></div>
+      </div>
+
+      <!-- CÂBLE 2 -->
+      <div class="cable">
+        <img src="img/cables/3.png" />
+        <img class="cableseul" src="img/cables/C3.png" />
+
+        <div
+          class="click-zone"
+          style="top: 50%; left: 53%; width: 155px; height: 230px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/4.png" />
+        <img class="cableseul" src="img/cables/C4.png" />
+
+        <div
+          class="click-zone"
+          style="top: 45%; left: 36%; width: 155px; height: 190px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/5.png" />
+        <img class="cableseul" src="img/cables/C5.png" />
+
+        <div
+          class="click-zone"
+          style="top: 55%; left: 37%; width: 190px; height: 190px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/6.png" />
+        <img class="cableseul" src="img/cables/C6.png" />
+
+        <div
+          class="click-zone"
+          style="top: 48%; left: 42%; width: 240px; height: 190px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/7.png" />
+        <img class="cableseul" src="img/cables/C7.png" />
+
+        <div
+          class="click-zone"
+          style="top: 66%; left: 41%; width: 315px; height: 100px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/8.png" />
+        <img class="cableseul" src="img/cables/C8.png" />
+
+        <div
+          class="click-zone"
+          style="top: 48%; left: 45%; width: 275px; height: 245px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/9.png" />
+        <img class="cableseul" src="img/cables/C9.png" />
+
+        <div
+          class="click-zone"
+          style="top: 52%; left: 37%; width: 187px; height: 203px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/10.png" />
+        <img class="cableseul" src="img/cables/C10.png" />
+
+        <div
+          class="click-zone"
+          style="top: 55%; left: 36%; width: 278px; height: 189px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/11.png" />
+        <img class="cableseul" src="img/cables/C11.png" />
+
+        <div
+          class="click-zone"
+          style="top: 55%; left: 36%; width: 278px; height: 189px"
+        ></div>
+      </div>
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/12.png" />
+        <img class="cableseul" src="img/cables/C12.png" />
+
+        <div
+          class="click-zone"
+          style="top: 57%; left: 46%; width: 245px; height: 180px"
+        ></div>
+      </div>
+
+      <!-- AJOUTE AUTANT DE CÂBLES QUE TU VEUX -->
+      <div class="cable">
+        <img src="img/cables/13.png" />
+        <img class="cableseul" src="img/cables/C13.png" />
+
+        <div
+          class="click-zone"
+          style="top: 54%; left: 41%; width: 215px; height: 200px"
+        ></div>
+      </div>
+
+      <div class="cable">
+        <img src="img/cables/Fin.png" />
+      </div>
+    </div>
+
+    <script>
+      const cables = document.querySelectorAll(".cable");
+      let current = 0;
+
+      cables.forEach((cable, index) => {
+        const zone = cable.querySelector(".click-zone");
+        const glowCable = cable.querySelector(".cableseul");
+
+        zone.addEventListener("mouseenter", () => {
+          glowCable.classList.add("glow");
+        });
+
+        zone.addEventListener("mouseleave", () => {
+          glowCable.classList.remove("glow");
+        });
+
+        zone.addEventListener("click", () => {
+          cable.classList.remove("active");
+          current++;
+
+          if (current < cables.length) {
+            cables[current].classList.add("active");
+          } else {
+            console.log("🎉 Tous les câbles ont été coupés !");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

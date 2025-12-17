@@ -4,21 +4,6 @@
     <meta charset="UTF-8" />
     <title>Énigme Interrupteurs</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #222;
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-      }
-
-      h1 {
-        margin-bottom: 20px;
-      }
-
       #grid {
         display: grid;
         grid-template-columns: repeat(4, 60px);
@@ -43,60 +28,193 @@
         margin-top: 20px;
         font-weight: bold;
       }
+      img {
+        width: 100%;
+        height: auto;
+      }
+      .fond {
+        position: relative;
+        display: inline-block;
+      }
+
+      .fond_disjoncteur {
+        display: block;
+      }
+
+      .disjoncteur {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; /* optionnel : même taille que le fond */
+        height: auto;
+      }
+      /* ZONES CLIQUABLES */
+      .click-zone {
+        position: absolute;
+        width: 25%;
+        height: 25%;
+        cursor: pointer;
+      }
+
+      /* EXEMPLE DE PLACEMENT */
+      .click-zone[data-index="0"] {
+        top: 0%;
+        left: 0%;
+      }
+      .click-zone[data-index="1"] {
+        top: 25%;
+        left: 0%;
+      }
+      .click-zone[data-index="2"] {
+        top: 50%;
+        left: 0%;
+      }
+      .click-zone[data-index="3"] {
+        top: 75%;
+        left: 0%;
+      }
+      .click-zone[data-index="4"] {
+        top: 0%;
+        left: 25%;
+      }
+      .click-zone[data-index="5"] {
+        top: 25%;
+        left: 25%;
+      }
+      .click-zone[data-index="6"] {
+        top: 50%;
+        left: 25%;
+      }
+      .click-zone[data-index="7"] {
+        top: 75%;
+        left: 25%;
+      }
+      .click-zone[data-index="8"] {
+        top: 0%;
+        left: 45%;
+      }
+      .click-zone[data-index="9"] {
+        top: 25%;
+        left: 45%;
+      }
+      .click-zone[data-index="10"] {
+        top: 50%;
+        left: 45%;
+      }
+      .click-zone[data-index="11"] {
+        top: 75%;
+        left: 45%;
+      }
+      .click-zone[data-index="12"] {
+        top: 0%;
+        left: 70%;
+      }
+      .click-zone[data-index="13"] {
+        top: 25%;
+        left: 70%;
+      }
+      .click-zone[data-index="14"] {
+        top: 50%;
+        left: 70%;
+      }
+      .click-zone[data-index="15"] {
+        top: 75%;
+        left: 70%;
+      }
     </style>
   </head>
   <body>
     <h1>Allume tous les interrupteurs !</h1>
-    <div id="grid"></div>
-    <div id="message"></div>
-
-    <script>
-      const gridSize = 4;
-      const grid = document.getElementById("grid");
-      const message = document.getElementById("message");
-
-      // Créer les interrupteurs
-      const switches = [];
-      for (let i = 0; i < gridSize * gridSize; i++) {
-        const btn = document.createElement("div");
-        btn.classList.add("switch");
-        grid.appendChild(btn);
-        switches.push(btn);
-      }
-
-      // Retourner un interrupteur
-      function toggleSwitch(index) {
-        if (index < 0 || index >= switches.length) return;
-        switches[index].classList.toggle("on");
-      }
-
-      // Cliquer sur un interrupteur
-      switches.forEach((btn, index) => {
-        btn.addEventListener("click", () => {
-          const row = Math.floor(index / gridSize);
-          const col = index % gridSize;
-
-          // Interrupteur cliqué
-          toggleSwitch(index);
-
-          // Voisins : haut, bas, gauche, droite
-          toggleSwitch(index - gridSize); // haut
-          toggleSwitch(index + gridSize); // bas
-          if (col > 0) toggleSwitch(index - 1); // gauche
-          if (col < gridSize - 1) toggleSwitch(index + 1); // droite
-
-          checkWin();
-        });
-      });
-
-      function checkWin() {
-        if (switches.every((s) => s.classList.contains("on"))) {
-          message.textContent =
-            "🎉 Bravo ! Tous les interrupteurs sont allumés !";
-        } else {
-          message.textContent = "";
-        }
-      }
-    </script>
+    <div class="fond">
+      <img
+        class="fond_disjoncteur"
+        src="img/Fond disjoncteur.jpg"
+        alt="Light Out Puzzle"
+      />
+      <img class="disjoncteur" src="img/1.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/2.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/3.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/4.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/5.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/6.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/7.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/8.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/9.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/10.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/11.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/12.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/13.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/14.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/15.png" alt="Light Out Puzzle" />
+      <img class="disjoncteur" src="img/16.png" alt="Light Out Puzzle" />
+      <div class="click-zone" data-index="0"></div>
+      <div class="click-zone" data-index="1"></div>
+      <div class="click-zone" data-index="2"></div>
+      <div class="click-zone" data-index="3"></div>
+      <div class="click-zone" data-index="4"></div>
+      <div class="click-zone" data-index="5"></div>
+      <div class="click-zone" data-index="6"></div>
+      <div class="click-zone" data-index="7"></div>
+      <div class="click-zone" data-index="8"></div>
+      <div class="click-zone" data-index="9"></div>
+      <div class="click-zone" data-index="10"></div>
+      <div class="click-zone" data-index="11"></div>
+      <div class="click-zone" data-index="12"></div>
+      <div class="click-zone" data-index="13"></div>
+      <div class="click-zone" data-index="14"></div>
+      <div class="click-zone" data-index="15"></div>
+    </div>
   </body>
+<script>
+  const zones = document.querySelectorAll(".click-zone");
+  const switches = document.querySelectorAll(".disjoncteur");
+  const message = document.getElementById("message");
+
+  const GRID_SIZE = 4;
+  let state = Array(switches.length).fill(false);
+  // false = image visible (éteint)
+  // true = image cachée (allumé)
+
+  function toggle(index) {
+    if (index < 0 || index >= state.length) return;
+    state[index] = !state[index];
+    switches[index].style.display = state[index] ? "none" : "block";
+  }
+
+  function toggleWithNeighbors(index) {
+    const row = Math.floor(index / GRID_SIZE);
+    const col = index % GRID_SIZE;
+
+    // lui-même
+    toggle(index);
+
+    // gauche
+    if (col > 0) toggle(index - 1);
+
+    // droite
+    if (col < GRID_SIZE - 1) toggle(index + 1);
+
+    // haut
+    if (row > 0) toggle(index - GRID_SIZE);
+
+    // bas
+    if (row < GRID_SIZE - 1) toggle(index + GRID_SIZE);
+  }
+
+  zones.forEach(zone => {
+    zone.addEventListener("click", () => {
+      const index = parseInt(zone.dataset.index);
+      toggleWithNeighbors(index);
+      checkWin();
+    });
+  });
+
+  function checkWin() {
+    if (state.every(v => v === true)) {
+      message.textContent = "🎉 Bien joué bb !";
+      console.log("bien joué bb");
+    }
+  }
+</script>
+
 </html>
