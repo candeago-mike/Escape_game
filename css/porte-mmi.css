@@ -5,9 +5,12 @@ body {
   color: #fff;
   font-family: system-ui, sans-serif;
 }
-body.cadenas {
-  min-height: 300vh;
+
+.bodycadena {
+  min-height: 300vh !important;
+  padding: 0;
 }
+
 .facade {
   position: absolute;
   bottom: 0;
@@ -27,23 +30,7 @@ body.cadenas {
   z-index: 6;
 }
 
-.porteMMI {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 3;
-}
 
-.lock-wrapper {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 4;
-}
 
 .lock {
   position: relative;
@@ -155,10 +142,34 @@ input {
   top: 55%;
   left: 45%;
   z-index: 1100;
+    cursor: pointer;
+
 }
 
 .glow {
   filter: drop-shadow(0 0 6px #0f0) drop-shadow(0 0 12px #0f0)
     drop-shadow(0 0 20px #0f0);
-  cursor: pointer;
+}
+
+
+
+.porteMMI {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+
+.lock-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+
+
 }
