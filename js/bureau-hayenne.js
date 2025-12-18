@@ -52,7 +52,7 @@ hayenneImg.addEventListener("click", () => {
   document.querySelector(".text-typing-hayenne .text-content").innerHTML = "";
 
   gsap.to(".text-typing-hayenne .text-content", {
-    duration: 2,
+    duration: 1,
     text: "Tu voulais me parler de quelque chose ?",
     ease: "none",
     onComplete: () => {

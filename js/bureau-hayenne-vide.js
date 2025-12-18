@@ -14,11 +14,10 @@ window.addEventListener("load", () => {
   hayWowTextSpan.innerHTML = "";
 
   gsap.to(hayWowTextSpan, {
-    duration: 3,
+    duration: 2,
     text: "Ah oui ! Karabatic est en direct ! Je ne peux pas louper ça ! Je te confie mon bureau.",
     ease: "none",
     onComplete: () => {
-      // triangle qui pulse si tu veux
       gsap.to(".text-typing-hayenne-wow .triangle", {
         duration: 0.5,
         opacity: 1,
