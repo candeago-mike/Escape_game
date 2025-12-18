@@ -6,7 +6,6 @@
     <title>Salle 03 F</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/03f.css" />
-
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -14,35 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
   </head>
   <body class="salle-03-f">
-    <img class="background imgporte" src="img/03fporte.jpg" alt="03f porte" />
-    <!-- DIGICODE EN PLEIN ÉCRAN -->
-    <div id="digicode-overlay">
-      <div class="input-wrapper">
-        <label for="codeInput">Code d'entrée :</label>
-
-        <!-- affichage 5 cases -->
-        <div class="code-display" id="codeDisplay">
-          <span class="digit-box"></span>
-          <span class="digit-box"></span>
-          <span class="digit-box"></span>
-          <span class="digit-box"></span>
-          <span class="digit-box"></span>
-        </div>
-
-        <!-- input caché pour le clavier -->
-        <input type="text" id="codeInput" maxlength="5" autocomplete="off" />
-        <div id="result"></div>
-      </div>
-      <div id="buttons">
-        <!-- Boutons 1 à 9 -->
-        <button>1</button><button>2</button><button>3</button> <button>4</button
-        ><button>5</button><button>6</button> <button>7</button
-        ><button>8</button><button>9</button>
-        <div></div>
-        <button>0</button>
-        <div></div>
-      </div>
-    </div>
     <header>
       <div id="timer">30:00</div>
       <button id="mapBtn">Map</button>
@@ -364,25 +334,81 @@
       </svg>
     </div>
 
+    <div class="fond03f">
+      <img src="img/03f/03f.jpg" alt="" />
+      <img id="pc" class="glow" src="img/03f/Ordi.png" alt="" />
+      <div
+        class="clickzone"
+        style="
+          width: 350px;
+          height: 250px;
+          position: absolute;
+          top: 55%;
+          left: 32%;
+        "
+      ></div>
+    </div>
     <div class="text-typing text-typing-03f">
       <span class="text-content"></span>
       <svg width="20" height="20" viewBox="0 0 10 10" class="triangle-icon">
         <polygon points="0,0 10,0 5,10" fill="white" class="triangle" />
       </svg>
     </div>
+    <script>
+      const clickzone = document.querySelector(".clickzone");
+      const pc = document.getElementById("pc");
 
-    <button id="Btn">Entrer</button>
+      clickzone.addEventListener("mouseenter", () => {
+        pc.classList.add("glow");
+      });
 
-    <svg
-      class="light"
-      width="16"
-      height="16"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle cx="8" cy="8" r="6" />
-    </svg>
+      clickzone.addEventListener("mouseleave", () => {
+        pc.classList.remove("glow");
+      });
+    </script>
+    <script>
+      gsap.set(".triangle", {
+        opacity: 0,
+      });
+      // Animation du texte
+      gsap.to(".text-content", {
+        duration: 2,
+        delay: 1,
+        text: "Le courant est revenu",
+        ease: "none",
+        onComplete: function () {
+          // Une fois le texte fini, animer le triangle
+          gsap.to(".triangle", {
+            duration: 0.5,
+            opacity: 1,
+            y: 5,
+            repeat: -1, // répète en boucle
+            yoyo: true, // va-et-vient
+            ease: "sine.inOut",
+          });
+        },
+      });
 
-    <script src="js/03f.js"></script>
+      // Masquer au clic
+      const bubble = document.querySelector(".text-typing-03f");
+      const lumiere = document.querySelector(".light");
+
+      lumiere.addEventListener("click", function () {
+        window.location.href = "LightOut.html";
+      });
+      bubble.addEventListener("click", function () {
+        if (!canHide) return;
+        this.style.display = "none";
+      });
+
+      // Masquer à la touche Entrée
+      document.addEventListener("keydown", function (event) {
+        if (!canHide) return;
+        if (event.key === "Enter") {
+          bubble.style.display = "none";
+        }
+      });
+    </script>
     <script src="js/script.js"></script>
   </body>
 </html>

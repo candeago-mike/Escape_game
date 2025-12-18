@@ -124,7 +124,40 @@
     </style>
   </head>
   <body>
-    <h1>Allume tous les interrupteurs !</h1>
+    <!-- À mettre dans ton <body> -->
+    <div
+      id="win-popup"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 40px 60px;
+        font-size: 2rem;
+        border-radius: 20px;
+        text-align: center;
+        z-index: 10000;
+      "
+    >
+      🎉 Félicitations ! Vous avez tout allumé ! 🎉
+      <br /><br />
+      <button
+        id="close-popup"
+        style="
+          margin-top: 20px;
+          padding: 10px 20px;
+          font-size: 1rem;
+          cursor: pointer;
+          border-radius: 10px;
+        "
+      >
+        Fermer
+      </button>
+    </div>
+
     <div class="fond">
       <img
         class="fond_disjoncteur"
@@ -166,6 +199,20 @@
     </div>
   </body>
   <script>
+    function checkWin() {
+      if (state.every((v) => v === true)) {
+        // Rediriger vers la page 03f.html
+        window.location.href = "03f.html";
+        console.log(
+          "Tous les interrupteurs allumés, redirection vers 03f.html !"
+        );
+      }
+    }
+
+    document.getElementById("close-popup").addEventListener("click", () => {
+      document.getElementById("win-popup").style.display = "none";
+    });
+
     const zones = document.querySelectorAll(".click-zone");
     const switches = document.querySelectorAll(".disjoncteur");
     const message = document.getElementById("message");
@@ -208,12 +255,5 @@
         checkWin();
       });
     });
-
-    function checkWin() {
-      if (state.every((v) => v === true)) {
-        message.textContent = "🎉 Bien joué bb !";
-        console.log("bien joué bb");
-      }
-    }
   </script>
 </html>
