@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hall MMI</title>
+    <script src="js/inventory.js"></script>
     <link rel="stylesheet" href="css/hall.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
@@ -14,6 +15,8 @@
   </head>
   <body>
     <header>
+      <div id="inventory-bar"></div>
+
       <div id="timer">30:00</div>
       <button id="mapBtn">Map</button>
     </header>
@@ -335,6 +338,19 @@
     </div>
     <img class="background fond" src="img/hall/Hall MMI.jpg" alt="fond hall" />
     <img class="background cafetiere" src="img/hall/Cafe.png" alt="cafetiere" />
+    <div
+      class="click-zone"
+      style="
+        width: 224px;
+        height: 478px;
+        position: absolute;
+        top: 22%;
+        left: 63%;
+        z-index: 20;
+        cursor: pointer;
+      "
+      id="cafetiereZone"
+    ></div>
     <img class="background eponge" src="img/hall/eponges.png" alt="eponges" />
     <h1>Hall MMI</h1>
     <div class="text-typing text-typing-hall">
@@ -347,4 +363,62 @@
     <script src="js/hall.js"></script>
     <script src="js/script.js"></script>
   </body>
+
+  <script>
+    console.log("Hall MMI loaded");
+
+    if (typeof Inventory === "undefined") {
+      console.error("❌ Inventory non chargé");
+    } else {
+      console.log(Inventory.listItems());
+    }
+
+    const clickCafetiere = document.getElementById("cafetiereZone");
+    let messageShown = false;
+
+    clickCafetiere.addEventListener("click", () => {
+      const inventoryItems = Inventory.listItems();
+
+      if (!inventoryItems.includes("tasse")) {
+        if (messageShown) return; // évite de relancer l'animation
+        messageShown = true;
+        console.log(hint);
+        hint.style.display = "block";
+        // reset sécurité
+        gsap.killTweensOf(".text-content");
+        gsap.killTweensOf(".triangle");
+        gsap.set(".triangle", { opacity: 0, y: 0 });
+
+        // Animation du texte
+        gsap.to(".text-content", {
+          duration: 2,
+          delay: 0.5,
+          text: "Je ne dois pas faire mon thé maintenant, je dois retrouver mon ordinateur !",
+          ease: "none",
+          onComplete: () => {
+            // Animation du triangle
+            gsap.to(".triangle", {
+              duration: 0.5,
+              opacity: 1,
+              y: 5,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut",
+            });
+          },
+        });
+
+        return;
+      }
+
+      console.log("✅ Tasse détectée, accès à la cafetière");
+
+      // reset UI avant de partir (optionnel mais propre)
+      messageShown = false;
+      gsap.killTweensOf(".triangle");
+      gsap.set(".triangle", { opacity: 0 });
+
+      window.location.href = "cafetiere.html";
+    });
+  </script>
 </html>

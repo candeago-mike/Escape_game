@@ -22,10 +22,10 @@ gsap.to(".text-content", {
 
 const hint = document.querySelector(".text-typing-hall");
 
-// Masquer au clic
-document.addEventListener("click", function () {
-  hint.style.display = "none";
-});
+// // Masquer au clic
+// document.addEventListener("click", function () {
+//   hint.style.display = "none";
+// });
 
 // Masquer à la touche Entrée
 document.addEventListener("keydown", function (event) {

@@ -3,168 +3,365 @@
   <head>
     <meta charset="UTF-8" />
     <title>Escape Game - Café</title>
+
     <style>
       body {
-        font-family: Arial, sans-serif;
+        margin: 0;
         background: #1e1e2f;
         color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        font-family: Arial, sans-serif;
       }
 
-      .game {
-        background: #2a2a40;
-        padding: 30px;
+      .section {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* IMAGES */
+      .bouton {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      /* ZONES CLIQUABLES */
+      .clickzone {
+        position: absolute;
+        z-index: 20;
+        cursor: pointer;
+      }
+
+      .glow {
+        filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #fff);
+      }
+
+      /* UI */
+      .ui {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.75);
+        padding: 16px 24px;
         border-radius: 12px;
-        width: 350px;
+        min-width: 320px;
+        z-index: 2011;
+      }
+
+      .ui-block {
+        margin-bottom: 10px;
+      }
+
+      .label {
+        margin-bottom: 4px;
+        font-size: 16px;
+      }
+
+      .bars {
+        display: flex;
+        gap: 20px;
+        align-items: flex-end;
+      }
+
+      .bar {
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border-radius: 4px;
+        opacity: 0.3;
+      }
+
+      .bar.active {
+        opacity: 1;
+        background: #ffffff;
+      }
+
+      /* Taille gobelet (grossit) */
+      .size-0 {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* LIGNES DE DOSAGE */
+      .dose-line {
+        position: absolute;
+        z-index: 30;
+        padding: 10px 14px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .dose-line .label {
+        font-size: 16px;
+        white-space: nowrap;
+      }
+
+      .bar {
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border-radius: 4px;
+        opacity: 0.3;
+      }
+
+      /* Taille gobelet */
+      .size-0 {
+        width: 16px;
+        height: 16px;
+      }
+
+      .size-1 {
+        width: 24px;
+        height: 24px;
+      }
+
+      .size-2 {
+        width: 32px;
+        height: 32px;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #4caf50;
+        color: white;
+        width: 100%;
+      }
+
+      .success {
+        color: #00ff99;
+        margin-top: 8px;
         text-align: center;
       }
 
-      h1 {
-        margin-bottom: 20px;
-      }
-
-      .sizes {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-      }
-
-      .size-btn {
-        flex: 1;
-        margin: 0 5px;
-        padding: 10px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        background: #444;
-        color: white;
-        font-size: 16px;
-      }
-
-      .size-btn.active {
-        background: #4caf50;
-      }
-
-      .points {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin: 10px 0 20px;
-      }
-
-      .point {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        background: #555;
-        cursor: pointer;
-      }
-
-      .point.active {
-        background: gold;
-      }
-
-      button.validate {
-        padding: 10px 20px;
-        border: none;
-        background: #2196f3;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 6px;
-      }
-
-      .message {
-        margin-top: 20px;
-        font-weight: bold;
-      }
-
-      .win {
-        color: #00ff99;
-      }
-
-      .lose {
+      .error {
         color: #ff6b6b;
+        margin-top: 8px;
+        text-align: center;
+      }
+
+      /* POPUP */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 5000;
+      }
+
+      .popup {
+        background: #2a2a40;
+        padding: 30px 40px;
+        border-radius: 16px;
+        text-align: center;
+        min-width: 320px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      }
+
+      .popup.success {
+        border: 2px solid #00ff99;
+      }
+
+      .popup.error {
+        border: 2px solid #ff6b6b;
+      }
+
+      .popup h2 {
+        margin-bottom: 20px;
+      }
+
+      .popup button {
+        margin-top: 10px;
+        background: #2196f3;
       }
     </style>
   </head>
+
   <body>
-    <div class="game">
-      <h1>☕ Préparer le café</h1>
+    <div class="section">
+      <!-- IMAGES -->
+      <img class="bouton" src="img/the/The.jpg" />
+      <img class="bouton" src="img/the/The 1.png" />
+      <img class="bouton" src="img/the/The 2.png" />
+      <img class="bouton" src="img/the/The 3.png" />
+      <img class="bouton" src="img/the/The 4.png" />
+      <img class="bouton" src="img/the/The 5.png" />
+      <img class="bouton" src="img/the/The 6.png" />
+      <img class="bouton" src="img/the/The 7.png" />
 
-      <p>Taille du café</p>
-      <div class="sizes">
-        <button class="size-btn" onclick="selectSize('petit', this)">
-          Petit
-        </button>
-        <button class="size-btn" onclick="selectSize('moyen', this)">
-          Moyen
-        </button>
-        <button class="size-btn" onclick="selectSize('grand', this)">
-          Grand
-        </button>
+      <!-- DIMINUER -->
+      <div
+        class="clickzone"
+        data-index="1"
+        style="top: 38%; left: 33%; width: 100px; height: 100px"
+      ></div>
+      <div
+        class="clickzone"
+        data-index="2"
+        style="top: 57%; left: 33%; width: 100px; height: 100px"
+      ></div>
+      <div
+        class="clickzone"
+        data-index="3"
+        style="top: 74%; left: 33%; width: 100px; height: 100px"
+      ></div>
+
+      <!-- AUGMENTER -->
+      <div
+        class="clickzone"
+        data-index="4"
+        style="top: 39%; left: 61%; width: 100px; height: 100px"
+      ></div>
+      <div
+        class="clickzone"
+        data-index="5"
+        style="top: 57%; left: 61%; width: 100px; height: 100px"
+      ></div>
+      <div
+        class="clickzone"
+        data-index="6"
+        style="top: 74%; left: 61%; width: 100px; height: 100px"
+      ></div>
+    </div>
+
+    <!-- LIGNE GOBELET -->
+    <div class="dose-line" style="top: 43%; left: 42%">
+      <div class="bars" id="size-bars"></div>
+    </div>
+
+    <!-- LIGNE LAIT -->
+    <div class="dose-line" style="top: 61%; left: 42%">
+      <div class="bars" id="milk-bars"></div>
+    </div>
+
+    <!-- LIGNE SUCRE -->
+    <div class="dose-line" style="top: 78%; left: 42%">
+      <div class="bars" id="sugar-bars"></div>
+    </div>
+
+    <div
+      id="validate"
+      class="clickzone"
+      data-index="7"
+      style="top: 89%; left: 40%; width: 306px; height: 100px"
+    ></div>
+    <!-- POPUP -->
+    <div class="popup-overlay" id="popup">
+      <div class="popup" id="popup-content">
+        <h2 id="popup-message"></h2>
+        <button id="close-popup">Fermer</button>
       </div>
-
-      <p>Dose de sucre</p>
-      <div class="points" id="sugar"></div>
-
-      <p>Dose de lait</p>
-      <div class="points" id="milk"></div>
-
-      <button class="validate" onclick="checkWin()">Valider</button>
-
-      <div class="message" id="message"></div>
     </div>
 
     <script>
-      let selectedSize = "";
-      let sugarDose = 0;
-      let milkDose = 0;
+      const zones = document.querySelectorAll(".clickzone");
+      const boutons = document.querySelectorAll(".bouton");
 
-      function selectSize(size, button) {
-        selectedSize = size;
-        document
-          .querySelectorAll(".size-btn")
-          .forEach((btn) => btn.classList.remove("active"));
-        button.classList.add("active");
-      }
+      let sizeIndex = 0; // 0-2
+      let milk = 1; // 1-5
+      let sugar = 1; // 1-5
 
-      function createPoints(containerId, callback) {
-        const container = document.getElementById(containerId);
-        for (let i = 1; i <= 5; i++) {
-          const point = document.createElement("div");
-          point.classList.add("point");
-          point.addEventListener("click", () => {
-            callback(i);
-            updatePoints(container, i);
-          });
-          container.appendChild(point);
+      const sizeBars = document.getElementById("size-bars");
+      const milkBars = document.getElementById("milk-bars");
+      const sugarBars = document.getElementById("sugar-bars");
+      const resultEl = document.getElementById("result");
+
+      function renderSize() {
+        sizeBars.innerHTML = "";
+        for (let i = 0; i <= sizeIndex; i++) {
+          const bar = document.createElement("div");
+          bar.className = `bar active size-${i}`;
+          sizeBars.appendChild(bar);
         }
       }
 
-      function updatePoints(container, count) {
-        [...container.children].forEach((point, index) => {
-          point.classList.toggle("active", index < count);
+      function renderBars(container, count) {
+        container.innerHTML = "";
+        for (let i = 0; i < count; i++) {
+          const bar = document.createElement("div");
+          bar.className = "bar active";
+          container.appendChild(bar);
+        }
+      }
+
+      function updateUI() {
+        renderSize();
+        renderBars(milkBars, milk);
+        renderBars(sugarBars, sugar);
+      }
+
+      zones.forEach((zone) => {
+        const index = Number(zone.dataset.index);
+        const bouton = boutons[index];
+
+        zone.addEventListener("mouseenter", () => bouton.classList.add("glow"));
+        zone.addEventListener("mouseleave", () =>
+          bouton.classList.remove("glow")
+        );
+
+        zone.addEventListener("click", () => {
+          switch (index) {
+            case 1:
+              sizeIndex = Math.max(0, sizeIndex - 1);
+              break;
+            case 4:
+              sizeIndex = Math.min(2, sizeIndex + 1);
+              break;
+            case 2:
+              milk = Math.max(1, milk - 1);
+              break;
+            case 5:
+              milk = Math.min(5, milk + 1);
+              break;
+            case 3:
+              sugar = Math.max(1, sugar - 1);
+              break;
+            case 6:
+              sugar = Math.min(5, sugar + 1);
+              break;
+          }
+          updateUI();
         });
-      }
+      });
 
-      createPoints("sugar", (value) => (sugarDose = value));
-      createPoints("milk", (value) => (milkDose = value));
+      const popup = document.getElementById("popup");
+      const popupContent = document.getElementById("popup-content");
+      const popupMessage = document.getElementById("popup-message");
 
-      function checkWin() {
-        const message = document.getElementById("message");
+      document.getElementById("validate").addEventListener("click", () => {
+        popup.style.display = "flex";
 
-        if (selectedSize === "moyen" && sugarDose === 5 && milkDose === 2) {
-          message.textContent = "🎉 Bravo ! Le café est parfait, tu as gagné !";
-          message.className = "message win";
+        if (sizeIndex === 1 && milk === 2 && sugar === 5) {
+          popupMessage.textContent = "🎉 Boisson parfaite !";
+          popupContent.className = "popup success";
         } else {
-          message.textContent = "❌ Mauvaise combinaison... Réessaie.";
-          message.className = "message lose";
+          popupMessage.textContent = "❌ Mauvais dosage...";
+          popupContent.className = "popup error";
         }
-      }
+      });
+
+      document.getElementById("close-popup").addEventListener("click", () => {
+        popup.style.display = "none";
+      });
+
+      updateUI();
     </script>
   </body>
 </html>

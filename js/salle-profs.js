@@ -1,3 +1,7 @@
+/* ============================
+   SETUP ELEMENTS
+============================ */
+
 const container = document.querySelector(".text-typing-the-flop .text-content");
 const bubble = document.querySelector(".text-typing-the-flop");
 const replayBtn = document.getElementById("replayBtn");
@@ -6,6 +10,12 @@ const triangle = document.querySelector(".triangle");
 let currentIndex = 0;
 let isTyping = false;
 let finishedAll = false;
+let cupAdded = false;
+let dialoguesEnabled = true;
+
+/* ============================
+   MESSAGES
+============================ */
 
 const messages = [
   "Oh non ! Mon thé est renversé ! Je n'ai pas le temps d'en refaire un, tu pourrais t'en charger ?",
@@ -13,21 +23,25 @@ const messages = [
   'Quoique, je vais prendre un <span class="highlight-yellow">grand</span> thé avec le <span class="highlight-yellow">double de sucre</span> mais par contre avec <span class="highlight-yellow">une dose de lait en moins</span>.',
   'Tu sais quoi, un <span class="highlight-yellow">petit</span> thé conviendra, avec <span class="highlight-yellow">un sucre en plus</span> mais le <span class="highlight-yellow">double de lait</span> cette fois.',
   'Finalement, je pense que le thé parfait serait la <span class="highlight-yellow">taille au dessus</span>, tu peux <span class="highlight-yellow">ajouter 2 sucres en plus</span> et <span class="highlight-yellow">remettre le lait comme au début</span>.',
+  "Tu as récupéré la tasse de M. Dubois !",
 ];
 
-// tape le HTML lentement
+/* ============================
+   TYPING EFFECT
+============================ */
+
 function typeHtml(html, onComplete) {
   container.innerHTML = "";
   isTyping = true;
 
   let i = 0;
-  const total = html.length;
-  const speed = 10; // ms par caractère
+  const speed = 10;
 
   function step() {
     i++;
     container.innerHTML = html.slice(0, i);
-    if (i < total) {
+
+    if (i < html.length) {
       setTimeout(step, speed);
     } else {
       isTyping = false;
@@ -38,12 +52,14 @@ function typeHtml(html, onComplete) {
   step();
 }
 
-// affichage d’un message
+/* ============================
+   SHOW MESSAGE
+============================ */
+
 function showMessage(index) {
   const html = messages[index];
 
   if (index === 0) {
-    // intro + triangle
     typeHtml(html, () => {
       gsap.to(triangle, {
         duration: 0.5,
@@ -59,52 +75,78 @@ function showMessage(index) {
   }
 }
 
-// avancée dans le scénario au clic / Enter
+/* ============================
+   NEXT MESSAGE
+============================ */
+
 function goNext() {
+  if (!dialoguesEnabled) return;
   if (isTyping) return;
 
-  // encore des messages à afficher
   if (currentIndex < messages.length - 1) {
     currentIndex++;
     showMessage(currentIndex);
     return;
   }
 
-  // on est déjà sur la dernière consigne
   if (!finishedAll) {
-    // premier clic/Enter sur la dernière → marquer comme fini + montrer le bouton
     finishedAll = true;
-    replayBtn.style.display = "inline-block";
+
+    if (!cupAdded && !Inventory.listItems().includes("tasse")) {
+      Inventory.addItem("tasse");
+      cupAdded = true;
+      console.log("☕ Tasse ajoutée à l'inventaire");
+    }
+
     bubble.style.display = "none";
+    replayBtn.style.display = "inline-block";
 
     gsap.fromTo(
       replayBtn,
       { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+      { opacity: 1, y: 0, duration: 0.5 }
     );
   }
 }
 
-// interactions
+/* ============================
+   EVENTS
+============================ */
+
 bubble.addEventListener("click", goNext);
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") goNext();
 });
 
-// replay
+/* ============================
+   REPLAY (TOUJOURS AUTORISÉ)
+============================ */
+
 replayBtn.addEventListener("click", () => {
+  dialoguesEnabled = true;
   replayBtn.style.display = "none";
   bubble.style.display = "flex";
 
-  // on laisse le triangle comme il est, pas besoin de le reset
-  // gsap.set(triangle, { opacity: 0, y: 0 });
-
-  currentIndex = 1; // reprendre à la consigne 1 (deuxième message)
+  currentIndex = 0;
   finishedAll = false;
-  showMessage(currentIndex);
+
+  showMessage(0);
 });
 
-// lancement initial
+/* ============================
+   INITIAL LOAD LOGIC
+============================ */
+
 gsap.set(triangle, { opacity: 0 });
-showMessage(0);
+
+const hasCup = Inventory.listItems().includes("tasse");
+
+if (hasCup) {
+  dialoguesEnabled = false;
+  replayBtn.style.display = "inline-block";
+  bubble.style.display = "none";
+  console.log("☕ Tasse déjà dans l'inventaire → dialogues désactivés");
+} else {
+  showMessage(0);
+}

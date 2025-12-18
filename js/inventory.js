@@ -1,6 +1,6 @@
 // Charger inventaire depuis sessionStorage ou utiliser par défaut
 let Inventory = JSON.parse(sessionStorage.getItem("Inventory")) || {
-  items: ["sword", "shield", "potion"],
+  items: [],
 };
 
 // Ré-attacher les méthodes à l'objet Inventory
