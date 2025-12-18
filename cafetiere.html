@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Escape Game - Café</title>
-
+    <script src="js/inventory.js"></script>
     <style>
       body {
         margin: 0;
@@ -271,9 +271,11 @@
     </div>
 
     <script>
+      let isSuccess = false;
+
       const zones = document.querySelectorAll(".clickzone");
       const boutons = document.querySelectorAll(".bouton");
-
+      const fermer = document.getElementById("close-popup");
       let sizeIndex = 0; // 0-2
       let milk = 1; // 1-5
       let sugar = 1; // 1-5
@@ -282,6 +284,14 @@
       const milkBars = document.getElementById("milk-bars");
       const sugarBars = document.getElementById("sugar-bars");
       const resultEl = document.getElementById("result");
+
+      fermer.addEventListener("click", () => {
+        popup.style.display = "none";
+
+        if (isSuccess) {
+          window.location.href = "hall-mmi.html";
+        }
+      });
 
       function renderSize() {
         sizeBars.innerHTML = "";
@@ -351,9 +361,16 @@
         if (sizeIndex === 1 && milk === 2 && sugar === 5) {
           popupMessage.textContent = "🎉 Boisson parfaite !";
           popupContent.className = "popup success";
+
+          Inventory.addItem("thé");
+          console.log("✅ Thé ajouté à l'inventaire");
+
+          isSuccess = true; // ✅ autorise la sortie
         } else {
           popupMessage.textContent = "❌ Mauvais dosage...";
           popupContent.className = "popup error";
+
+          isSuccess = false; // ❌ empêche la sortie
         }
       });
 

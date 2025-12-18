@@ -141,12 +141,52 @@ replayBtn.addEventListener("click", () => {
 gsap.set(triangle, { opacity: 0 });
 
 const hasCup = Inventory.listItems().includes("tasse");
-
-if (hasCup) {
+const hasThe = Inventory.listItems().includes("thé");
+const DonnerTheBtn = document.getElementById("DonnerThe");
+const bubbleMerci = document.querySelector(".text-typing-merci");
+if (hasThe) {
   dialoguesEnabled = false;
+  replayBtn.style.display = "none";
+  DonnerTheBtn.style.display = "inline-block";
+  bubble.style.display = "none";
+  console.log("🍵 Thé déjà dans l'inventaire → dialogues désactivés");
+} else if (hasCup) {
+  dialoguesEnabled = false;
+  DonnerTheBtn.style.display = "none";
   replayBtn.style.display = "inline-block";
   bubble.style.display = "none";
   console.log("☕ Tasse déjà dans l'inventaire → dialogues désactivés");
 } else {
   showMessage(0);
 }
+
+DonnerTheBtn.addEventListener("click", () => {
+  // Désactive le bouton après clic
+  DonnerTheBtn.style.display = "none";
+
+  // Active la div de dialogue merci
+  bubbleMerci.style.display = "flex";
+
+  // Vide le contenu avant d'écrire
+  const merciContent = bubbleMerci.querySelector(".text-content");
+  merciContent.innerHTML = "";
+
+  // Animation du texte avec GSAP
+  gsap.to(merciContent, {
+    duration: 2,
+    text: "M3RC1 83AUC0UP",
+    ease: "none",
+    onComplete: () => {
+      // Triangle clignotant si tu veux (optionnel)
+      const triangleMerci = bubbleMerci.querySelector(".triangle");
+      gsap.to(triangleMerci, {
+        duration: 0.5,
+        opacity: 1,
+        y: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    },
+  });
+});

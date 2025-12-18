@@ -365,8 +365,6 @@
   </body>
 
   <script>
-    console.log("Hall MMI loaded");
-
     if (typeof Inventory === "undefined") {
       console.error("❌ Inventory non chargé");
     } else {
@@ -378,8 +376,37 @@
 
     clickCafetiere.addEventListener("click", () => {
       const inventoryItems = Inventory.listItems();
+      if (inventoryItems.includes("thé")) {
+        if (messageShown) return; // évite de relancer l'animation
+        messageShown = true;
+        console.log(hint);
+        hint.style.display = "block";
+        // reset sécurité
+        gsap.killTweensOf(".text-content");
+        gsap.killTweensOf(".triangle");
+        gsap.set(".triangle", { opacity: 0, y: 0 });
 
-      if (!inventoryItems.includes("tasse")) {
+        // Animation du texte
+        gsap.to(".text-content", {
+          duration: 2,
+          delay: 0.5,
+          text: "J'ai déjà mon thé, je dois le rapporter a M.Dubois !",
+          ease: "none",
+          onComplete: () => {
+            // Animation du triangle
+            gsap.to(".triangle", {
+              duration: 0.5,
+              opacity: 1,
+              y: 5,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut",
+            });
+          },
+        });
+
+        return;
+      } else if (!inventoryItems.includes("tasse")) {
         if (messageShown) return; // évite de relancer l'animation
         messageShown = true;
         console.log(hint);
@@ -410,9 +437,6 @@
 
         return;
       }
-
-      console.log("✅ Tasse détectée, accès à la cafetière");
-
       // reset UI avant de partir (optionnel mais propre)
       messageShown = false;
       gsap.killTweensOf(".triangle");

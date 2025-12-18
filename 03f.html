@@ -12,6 +12,88 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
   </head>
   <body class="salle-03-f">
+    <!-- DIGICODE EN PLEIN ÉCRAN -->
+    <div
+      id="digicode-overlay"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #111;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        z-index: 9999;
+      "
+    >
+      <h2>Entrez le code</h2>
+      <div
+        id="display"
+        style="font-size: 2rem; letter-spacing: 0.5rem; margin-bottom: 20px"
+      >
+        _ _ _ _ _
+      </div>
+      <div
+        id="buttons"
+        style="display: grid; grid-template-columns: repeat(3, 80px); gap: 10px"
+      >
+        <!-- Boutons 1 à 9 -->
+        <button>1</button><button>2</button><button>3</button> <button>4</button
+        ><button>5</button><button>6</button> <button>7</button
+        ><button>8</button><button>9</button>
+        <div></div>
+        <button>0</button>
+        <div></div>
+      </div>
+      <button id="clearBtn" style="margin-top: 20px; padding: 10px 20px">
+        Effacer
+      </button>
+    </div>
+
+    <script>
+      const correctCode = "31830";
+      let input = "";
+      const display = document.getElementById("display");
+      const overlay = document.getElementById("digicode-overlay");
+
+      // Met à jour l'affichage du digicode
+      function updateDisplay() {
+        let shown = input.split("").join(" ");
+        display.textContent = shown.padEnd(correctCode.length * 2, " _");
+      }
+
+      updateDisplay();
+
+      // Gestion des boutons numériques
+      document.querySelectorAll("#buttons button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (input.length < correctCode.length) {
+            input += btn.textContent;
+            updateDisplay();
+            if (input.length === correctCode.length) {
+              if (input === correctCode) {
+                overlay.style.display = "none"; // Code correct → accès autorisé
+              } else {
+                alert("Code incorrect !");
+                input = "";
+                updateDisplay();
+              }
+            }
+          }
+        });
+      });
+
+      // Bouton effacer
+      document.getElementById("clearBtn").addEventListener("click", () => {
+        input = "";
+        updateDisplay();
+      });
+    </script>
+
     <header>
       <div id="timer">30:00</div>
       <button id="mapBtn">Map</button>
