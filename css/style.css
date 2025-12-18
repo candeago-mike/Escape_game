@@ -250,36 +250,6 @@ button {
   overflow: visible;
 }
 
-/****** 03 F ******/
-
-.salle-03-f {
-  background-color: black;
-}
-.light {
-  position: absolute;
-  top: 30%;
-  right: 30%;
-  cursor: pointer;
-}
-.light circle {
-  fill: white;
-  transition: fill 0.2s linear;
-  animation: blinkFill 1s ease-in-out infinite;
-}
-
-/* animation blanc ↔ rouge */
-@keyframes blinkFill {
-  0% {
-    fill: white;
-  }
-  50% {
-    fill: red;
-  }
-  100% {
-    fill: white;
-  }
-}
-
 .background {
   position: absolute;
   bottom: 0;
@@ -288,13 +258,4 @@ button {
   height: 100%;
   object-fit: cover;
   z-index: 1;
-}
-
-.viseur {
-  position: absolute;
-  bottom: 0px;
-  left: 50px;
-  height: 600px;
-  object-fit: contain;
-  z-index: 3;
 }

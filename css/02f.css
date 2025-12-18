@@ -1,0 +1,50 @@
+
+.viseur {
+  position: absolute;
+  bottom: 0px;
+  left: 200px;
+  height: 600px;
+  object-fit: contain;
+  z-index: 3;
+}
+.viseur {
+  height: 600px;
+  position: absolute;
+  bottom: 0px;
+  right: 150px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.viseur:hover {
+  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #fff)
+    drop-shadow(0 0 20px #fff);
+}
+
+.autor {
+  margin-top: 0;
+  white-space: nowrap; 
+}
+
+.text-typing {
+  width: 680px;
+  background-color: black;
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  height: fit-content;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.text-typing {
+  display: none;
+}
