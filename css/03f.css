@@ -170,6 +170,35 @@ input {
     0 0 40px rgba(255, 255, 255, 0.4);
   background-color: #111;
 }
+
+.salle-03-f {
+  background-color: black;
+}
+.light {
+  position: absolute;
+  top: 30%;
+  right: 30%;
+  cursor: pointer;
+}
+.light circle {
+  fill: white;
+  transition: fill 0.2s linear;
+  animation: blinkFill 1s ease-in-out infinite;
+}
+
+/* animation blanc ↔ rouge */
+@keyframes blinkFill {
+  0% {
+    fill: white;
+  }
+  50% {
+    fill: red;
+  }
+  100% {
+    fill: white;
+  }
+}
+
 .fond03f {
   position: fixed;
   top: 0;

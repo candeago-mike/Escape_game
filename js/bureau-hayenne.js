@@ -1,4 +1,3 @@
-gsap.registerPlugin(TextPlugin);
 
 const trousseau = document.querySelector(".trousseau");
 const hayenneImg = document.querySelector(".hayenne");

@@ -335,52 +335,7 @@
         </g>
       </svg>
     </div>
-
-    <div class="text-typing text-typing-studio">
-      <span class="text-content"></span>
-      <svg width="20" height="20" viewBox="0 0 10 10" class="triangle-icon">
-        <polygon points="0,0 10,0 5,10" fill="white" class="triangle" />
-      </svg>
-    </div>
-
-    <script>
-      gsap.set(".triangle", {
-        opacity: 0,
-      });
-      // Animation du texte
-      gsap.to(".text-content", {
-        duration: 2,
-        delay: 1,
-        text: "Mince, elle n'est plus là, mon <span class='highlight-yellow'>PC</span> doit être ailleurs.",
-        ease: "none",
-        onComplete: function () {
-          // Une fois le texte fini, animer le triangle
-          gsap.to(".triangle", {
-            duration: 0.5,
-            opacity: 1,
-            y: 5,
-            repeat: -1, // répète en boucle
-            yoyo: true, // va-et-vient
-            ease: "sine.inOut",
-          });
-        },
-      });
-
-      const hint = document.querySelector(".text-typing-studio");
-
-      // Masquer au clic
-      document.addEventListener("click", function () {
-        hint.style.display = "none";
-      });
-
-      // Masquer à la touche Entrée
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-          // ou event.code === "Enter"
-          hint.style.display = "none";
-        }
-      });
-    </script>
+    
     <script src="js/script.js"></script>
   </body>
 </html>
