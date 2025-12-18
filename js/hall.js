@@ -53,7 +53,7 @@ clickCafetiere.addEventListener("click", () => {
     gsap.to(".text-content", {
       duration: 2,
       delay: 0.5,
-      text: "Je ne dois pas faire mon thé maintenant, je dois retrouver mon ordinateur !",
+      text: "Je ne dois pas faire mon thé maintenant, je dois retrouver mon PC !",
       ease: "none",
       onComplete: () => {
         // Animation du triangle
