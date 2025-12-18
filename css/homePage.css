@@ -104,3 +104,9 @@ input {
   object-fit: cover;
   z-index: -2;
 }
+
+.logo {
+  width: 500px;
+  position: absolute;
+  top: 30px;
+}

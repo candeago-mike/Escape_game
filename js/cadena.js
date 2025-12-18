@@ -130,3 +130,42 @@ input.addEventListener("input", () => {
     enter.classList.add("visible");
   }
 });
+
+const scrollHint = document.querySelector(".scroll-hint");
+let hasScrolled = false;
+let hintTimeout = null;
+
+function startScrollHintAnim() {
+  gsap.fromTo(
+    ".scroll-hint",
+    { y: 0, opacity: 0.2 },
+    {
+      y: -10,
+      opacity: 1,
+      duration: 0.6,
+      yoyo: true,
+      repeat: -1,
+      ease: "sine.inOut",
+    }
+  );
+}
+
+// on écoute le premier scroll
+function onFirstScroll() {
+  hasScrolled = true;
+  window.removeEventListener("scroll", onFirstScroll);
+  if (hintTimeout) {
+    clearTimeout(hintTimeout);
+    scrollHint.classList.remove("visible");
+  }
+}
+
+// dès le chargement, on lance le timer 10s
+hintTimeout = setTimeout(() => {
+  if (!hasScrolled) {
+    scrollHint.classList.add("visible");
+    startScrollHintAnim();
+  }
+}, 10000);
+
+window.addEventListener("scroll", onFirstScroll);
