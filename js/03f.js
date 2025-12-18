@@ -19,6 +19,10 @@ gsap.to(".text-typing-03f .text-content", {
     });
   },
 });
+const lumiere = document.querySelector(".light");
+lumiere.addEventListener("click", () => {
+  window.location.href = "LightOut.html";
+});
 
 const hint = document.querySelector(".text-typing-03f");
 const hintText = hint.querySelector(".text-content");
