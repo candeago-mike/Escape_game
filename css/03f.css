@@ -1,0 +1,22 @@
+.fond03f {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.glow {
+  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #fff);
+}
+
+.clickzone {
+  cursor: pointer;
+}
