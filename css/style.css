@@ -16,6 +16,10 @@ p {
 /****** MAP *********/
 
 /************ INVENTAIRE ***********/
+.highlight-yellow {
+  color: yellow;
+  font-weight: 600;
+}
 
 #inventory-bar {
   display: flex;
@@ -165,8 +169,8 @@ button {
 #Sous-sol-info {
   display: none;
 }
-#Couloir-info{
-  display:none;
+#Couloir-info {
+  display: none;
 }
 .cls-6 {
   font-size: 12px;
@@ -205,7 +209,7 @@ button {
 
 .text-typing {
   background-color: black;
-  padding: 20px;
+  padding: 14px 20px;
   font-size: 22px;
   display: flex;
   position: fixed;
@@ -215,7 +219,7 @@ button {
   text-align: center;
   width: 600px;
   color: white;
-  height: 50px;
+  height: fit-content;
   border: 1px solid #fff;
   align-items: center;
   justify-content: space-between;
@@ -273,4 +277,13 @@ button {
   height: 100%;
   object-fit: cover;
   z-index: 1;
+}
+
+.viseur {
+  position: absolute;
+  bottom: 0px;
+  left: 50px;
+  height: 600px;
+  object-fit: contain;
+  z-index: 3;
 }

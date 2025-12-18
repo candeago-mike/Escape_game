@@ -30,6 +30,10 @@ document.getElementById("playBtn").addEventListener("click", function (e) {
     duration: 1,
     opacity: 0,
   });
+  gsap.to(".logo", {
+    duration: 1,
+    opacity: 0,
+  });
   gsap.to(".backgroundVideo", {
     duration: 1,
     opacity: 1,

@@ -19,7 +19,7 @@ input {
   padding: 10px 20px;
   font-size: 22px;
   background-color: #000;
-
+  color: white;
   border: 1px solid #fff;
 }
 
@@ -103,4 +103,10 @@ input {
   height: 100%;
   object-fit: cover;
   z-index: -2;
+}
+
+.logo {
+  width: 500px;
+  position: absolute;
+  top: 30px;
 }

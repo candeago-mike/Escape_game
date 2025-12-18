@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hall MMI</title>
-    <script src="js/inventory.js"></script>
-    <link rel="stylesheet" href="css/hall.css" />
+    <title>Bureau de Mme Hayenne</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/hayenne.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -15,8 +14,6 @@
   </head>
   <body>
     <header>
-      <div id="inventory-bar"></div>
-
       <div id="timer">30:00</div>
       <button id="mapBtn">Map</button>
     </header>
@@ -336,24 +333,25 @@
         </g>
       </svg>
     </div>
-    <img class="background fond" src="img/hall/Hall MMI.jpg" alt="fond hall" />
-    <img class="background cafetiere" src="img/hall/Cafe.png" alt="cafetiere" />
-    <div
-      class="click-zone"
-      style="
-        width: 224px;
-        height: 478px;
-        position: absolute;
-        top: 22%;
-        left: 63%;
-        z-index: 20;
-        cursor: pointer;
-      "
-      id="cafetiereZone"
-    ></div>
-    <img class="background eponge" src="img/hall/eponges.png" alt="eponges" />
 
-    <script src="js/hall.js"></script>
+    <img
+      class="bureau-hayenne"
+      src="img/hayenne/fond-hayenne.jpg"
+      alt="fond-bureau"
+    />
+    <img class="hayenne-wow" src="img/hayenne/Hayenne2.png" alt="Hayenne" />
+
+
+    <div class="text-typing text-typing-hayenne-wow">
+      <p class="autor">Mme. Hayenne -</p>
+      <span class="text-content"></span>
+      <svg width="20" height="20" viewBox="0 0 20 20" class="triangle-icon">
+        <polygon points="0,0 20,0 10,20" fill="white" class="triangle" />
+      </svg>
+    </div>
+
+    <img class="trousseau" src="img/hayenne/cles.png" alt="trousseau" />
+    <script src="js/bureau-hayenne-vide.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
