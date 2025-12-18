@@ -3,7 +3,72 @@
 // const value = nameInput.value;
 // console.log(value);
 
+// salles qui ne doivent mener nulle part
+const deadRooms = new Set(["01f", "amphi-mmi"]);
+gsap.registerPlugin(TextPlugin);
 
+function showMapHint(message) {
+  // s'il existe déjà, on le réutilise
+  let hint = document.querySelector(".map-text-typing");
+  let hintText;
+
+  if (!hint) {
+    hint = document.createElement("div");
+    hint.className = "text-typing map-text-typing";
+    hint.innerHTML = `
+      <span class="text-content"></span>
+      <svg width="20" height="20" viewBox="0 0 10 10" class="triangle-icon">
+        <polygon points="0,0 10,0 5,10" fill="white" class="triangle" />
+      </svg>
+    `;
+    document.body.appendChild(hint);
+  }
+
+  hintText = hint.querySelector(".text-content");
+
+  // position de base (à adapter à ton layout)
+  hint.style.display = "flex";
+  hint.style.position = "fixed";
+  hint.style.bottom = "40px";
+  hint.style.left = "50%";
+  hint.style.transform = "translateX(-50%)";
+  hint.style.zIndex = "9999";
+
+  // reset animations + texte
+  gsap.killTweensOf(hintText);
+  gsap.killTweensOf(".map-text-typing .triangle");
+  gsap.set(".map-text-typing .triangle", { opacity: 0, y: 0 });
+  hintText.innerHTML = "";
+
+  gsap.to(hintText, {
+    duration: 1,
+    text: message,
+    ease: "none",
+    onComplete: () => {
+      gsap.to(".map-text-typing .triangle", {
+        duration: 0.5,
+        opacity: 1,
+        y: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    },
+  });
+
+  // fermer au clic ou Enter
+  hint.onclick = () => (hint.style.display = "none");
+  document.addEventListener(
+    "keydown",
+    function onKey(e) {
+      if (e.key === "Enter") {
+        hint.style.display = "none";
+        document.removeEventListener("keydown", onKey);
+      }
+    },
+    { once: true }
+  );
+}
 
 const value = localStorage.getItem("userInput");
 
@@ -26,24 +91,6 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") mapModal.classList.remove("show");
 });
 
-// Liens internes de la map
-const mapElements = mapModal.querySelectorAll(
-  'rect[class*="-map"], path[class*="-map"]'
-);
-
-mapElements.forEach((el) => {
-  const mapClass = Array.from(el.classList).find((c) => c.endsWith("-map"));
-  if (!mapClass) return;
-
-  const baseName = mapClass.replace(/-map$/, "");
-  el.style.cursor = "pointer";
-
-  el.addEventListener("click", () => {
-    window.location.href = `${baseName}.html`;
-  });
-});
-
-// Liens internes de la map (01f-map -> 01f.html, etc.)
 function initMapLinks() {
   const mapElements = mapModal.querySelectorAll(
     'rect[class*="-map"], path[class*="-map"]'
@@ -57,12 +104,17 @@ function initMapLinks() {
     el.style.cursor = "pointer";
 
     el.addEventListener("click", () => {
-      const targetUrl = `${baseName}.html`;
-      window.location.href = targetUrl;
+      if (deadRooms.has(baseName)) {
+        showMapHint("Je ne dois pas perdre mon temps là-bas.");
+      } else {
+        window.location.href = `${baseName}.html`;
+      }
     });
   });
 }
 
+// à appeler une fois, quand la map est dans le DOM
+initMapLinks();
 const timerDisplay = document.getElementById("timer");
 const startTimerBtn = document.getElementById("startTimerBtn");
 
