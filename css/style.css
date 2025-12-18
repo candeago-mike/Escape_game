@@ -16,6 +16,11 @@ p {
 /****** MAP *********/
 
 /************ INVENTAIRE ***********/
+.highlight-yellow {
+  color: yellow;
+  font-weight: 600;
+}
+
 
 #inventory-bar {
   display: flex;
@@ -273,4 +278,13 @@ button {
   height: 100%;
   object-fit: cover;
   z-index: 1;
+}
+
+.viseur {
+  position: absolute;
+  bottom: 0px;
+  left: 50px;
+  height : 600px;
+  object-fit: contain;
+  z-index: 3;
 }
