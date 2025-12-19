@@ -13,8 +13,39 @@
   </head>
   <body>
     <img class="background" src="img/05f.jpg" alt="studio" />
-    <img class="background" src="img/Soudure.png" alt="post Soudure">
+    <img
+      class="background"
+      id="poste"
+      src="img/Soudure.png"
+      alt="post Soudure"
+    />
+    <div
+      class="clickzone"
+      style="
+        width: 152px;
+        height: 144px;
+        position: absolute;
+        top: 71%;
+        left: 80%;
+        z-index: 2;
+        cursor: pointer;
+      "
+    ></div>
+    <script>
+      const clickzone = document.querySelector(".clickzone");
+      const poste = document.getElementById("poste");
+      clickzone.addEventListener("click", () => {
+        window.location.href = "soudure.html";
+      });
 
+      clickzone.addEventListener("mouseover", () => {
+        poste.style.filter =
+          "drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #fff)";
+      });
+      clickzone.addEventListener("mouseout", () => {
+        poste.style.filter = "none";
+      });
+    </script>
     <header>
       <div id="timer">30:00</div>
       <button id="mapBtn">Map</button>
@@ -335,7 +366,7 @@
         </g>
       </svg>
     </div>
-    
+
     <script src="js/script.js"></script>
   </body>
 </html>

@@ -336,7 +336,15 @@
 
     <div class="fond03f">
       <img src="img/03f/03f.jpg" alt="" />
-      <img id="pc" class="glow" src="img/03f/Ordi.png" alt="" />
+      <img
+        id="pc"
+        style="
+          filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #fff);
+          z-index: 2;
+          position: absolute;
+        "
+        src="img/03f/Ordi.png"
+      />
       <div
         class="clickzone"
         style="
@@ -364,6 +372,10 @@
 
       clickzone.addEventListener("mouseleave", () => {
         pc.classList.remove("glow");
+      });
+
+      clickzone.addEventListener("click", () => {
+        window.location.href = "linux.html";
       });
     </script>
     <script>

@@ -1,10 +1,37 @@
 gsap.registerPlugin(TextPlugin);
 
-const hayenneWowImg   = document.querySelector(".hayenne-wow");
-const hayenneWowBubble= document.querySelector(".text-typing-hayenne-wow");
-const hayWowTextSpan  = hayenneWowBubble.querySelector(".text-content");
-
+const hayenneWowImg = document.querySelector(".hayenne-wow");
+const hayenneWowBubble = document.querySelector(".text-typing-hayenne-wow");
+const hayWowTextSpan = hayenneWowBubble.querySelector(".text-content");
+const trousseau = document.querySelector(".trousseau");
+const moiBubble = document.querySelector(".text-typing-cle");
+const moiTextSpan = moiBubble.querySelector(".text-content-moi");
 // au départ, tu peux cacher la bulle en CSS (.text-typing-hayenne-wow { display:none; })
+
+trousseau.addEventListener("click", () => {
+  Inventory.addItem("trousseau");
+  console.log("🔑 Trousseau ajouté à l'inventaire :", Inventory.listItems());
+  moiBubble.style.display = "flex";
+
+  gsap.killTweensOf(moiTextSpan);
+  moiTextSpan.innerHTML = "";
+
+  gsap.to(moiTextSpan, {
+    duration: 2,
+    text: "J'ai récuperé les clés, je peux aller en 04F maintenant !",
+    ease: "none",
+    onComplete: () => {
+      gsap.to(".text-typing-hayenne-wow .triangle", {
+        duration: 0.5,
+        opacity: 1,
+        y: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    },
+  });
+});
 
 // 1) Au chargement, afficher la bulle + animer le texte
 window.addEventListener("load", () => {

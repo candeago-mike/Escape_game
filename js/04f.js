@@ -48,6 +48,7 @@ const book = document.getElementById("book");
 // ne pas fermer quand on clique dans le livre
 book.addEventListener("click", (e) => {
   e.stopPropagation();
+  Inventory.addItem("journal");
 });
 
 // fermer quand on clique ailleurs

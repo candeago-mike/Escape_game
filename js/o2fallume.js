@@ -58,7 +58,7 @@ viseurImg.addEventListener("click", (e) => {
   // 1er dialogue : problème
   if (dialogStep === 0) {
     playDialogue(
-      "Le câble du vidéoprojecteur est complètement bousillé, tu peux aller le réparer."
+      "Ahhhh il fonctionne, c'est Madame Hayenne qui va être contente !"
     );
 
     // Ajout du câble endommagé UNE SEULE FOIS
@@ -110,6 +110,18 @@ if (checkInventaire.includes("cableR") && cableBtn) {
 // ==============================
 if (cableBtn) {
   cableBtn.addEventListener("click", () => {
-    window.location.href = "02fallume.html";
+    const bgNormal = document.getElementById("bg-normal");
+    const bgProj = document.getElementById("bg-proj");
+
+    if (!bgNormal || !bgProj) return;
+
+    // Changement de décor
+    bgNormal.style.display = "none";
+    bgProj.style.display = "block";
+
+    // Optionnel : désactiver le bouton après usage
+    cableBtn.style.display = "none";
+
+    console.log("📽️ Vidéoprojecteur réparé !");
   });
 }

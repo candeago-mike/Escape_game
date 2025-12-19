@@ -93,9 +93,6 @@
     </style>
   </head>
   <body>
-    <div id="inventory-bar"></div>
-    <button id="ajoutbanane">AJOUTER BANANA</button>
-    <a href="tasse.html">ALLER A LA PAGE TASSE</a>
     <div id="desktop">
       <div id="explorer">
         <div id="folders">
@@ -107,53 +104,127 @@
     <div id="inventory-bar"></div>
     <button id="add-item-button">Ajouter une banane</button>
     <script>
-      // Structure de fichiers simulée avec sous-dossiers
+      // ==============================
+      // SYSTÈME DE FICHIERS CHAOTIQUE
+      // ==============================
       const fileSystem = {
         Documents: {
           type: "folder",
           content: {
-            "CV.pdf": {
-              type: "file",
-              icon: "https://img.icons8.com/color/48/000000/pdf.png",
-            },
-            "Projet.docx": {
-              type: "file",
-              icon: "https://img.icons8.com/color/48/000000/word.png",
-            },
-            "Notes.txt": {
-              type: "file",
-              icon: "https://img.icons8.com/ios/50/ffffff/notepad.png",
-            },
-          },
-        },
-        Images: {
-          type: "folder",
-          content: {
-            "photo1.jpg": {
-              type: "file",
-              icon: "https://img.icons8.com/ios-filled/50/ffffff/image.png",
-            },
-            "photo2.png": {
-              type: "file",
-              icon: "https://img.icons8.com/ios-filled/50/ffffff/image.png",
-            },
-            Dessins: {
+            Administratif: {
               type: "folder",
               content: {
-                "dessin1.svg": {
-                  type: "file",
-                  icon: "https://img.icons8.com/ios-filled/50/ffffff/image.png",
+                "impots_2019.pdf": { type: "file" },
+                "impots_2020.pdf": { type: "file" },
+                "impots_2021_FINAL_v2.pdf": { type: "file" },
+                Brouillons: {
+                  type: "folder",
+                  content: {
+                    "brouillon1.docx": { type: "file" },
+                    "brouillon2.docx": { type: "file" },
+                    "ancien.txt": { type: "file" },
+                  },
+                },
+              },
+            },
+            Cours: {
+              type: "folder",
+              content: {
+                MMI: {
+                  type: "folder",
+                  content: {
+                    "cours-web.pdf": { type: "file" },
+                    "cours-video.pdf": { type: "file" },
+                    "notes.txt": { type: "file" },
+                    Archives: {
+                      type: "folder",
+                      content: {
+                        "notes_v1.txt": { type: "file" },
+                        "notes_v2.txt": { type: "file" },
+                        Divers: {
+                          type: "folder",
+                          content: {
+                            "random.txt": { type: "file" },
+                            "test.txt": { type: "file" },
+                          },
+                        },
+                      },
+                    },
+                  },
                 },
               },
             },
           },
         },
-        Musique: {
+
+        Backup: {
           type: "folder",
           content: {
-            "chanson.mp3": {
-              type: "file",
-              icon: "https://img.icons8.com/ios-filled/50/ffffff/musical-notes.png",
+            Backup_Ancien: {
+              type: "folder",
+              content: {
+                "data_old.bin": { type: "file" },
+                "save1.bak": { type: "file" },
+                "save2.bak": { type: "file" },
+              },
+            },
+          },
+        },
+
+        Téléchargements: {
+          type: "folder",
+          content: {
+            "setup.exe": { type: "file" },
+            "image_random.png": { type: "file" },
+            "document(1).pdf": { type: "file" },
+            "document(2).pdf": { type: "file" },
+          },
+        },
+
+        Système: {
+          type: "folder",
+          content: {
+            Drivers: {
+              type: "folder",
+              content: {
+                "audio.sys": { type: "file" },
+                "video.sys": { type: "file" },
+              },
+            },
+            Logs: {
+              type: "folder",
+              content: {
+                "error.log": { type: "file" },
+                "warning.log": { type: "file" },
+                "debug.log": { type: "file" },
+              },
+            },
+          },
+        },
+
+        TEMP: {
+          type: "folder",
+          content: {
+            "temp1.tmp": { type: "file" },
+            "temp2.tmp": { type: "file" },
+            Random: {
+              type: "folder",
+              content: {
+                "???": { type: "file" },
+                "wtf.txt": { type: "file" },
+                Cache: {
+                  type: "folder",
+                  content: {
+                    "cache1.dat": { type: "file" },
+                    "cache2.dat": { type: "file" },
+
+                    // 🎯 LE FICHIER IMPORTANT
+                    "toto.txt": {
+                      type: "special",
+                    },
+                  },
+                },
+              },
             },
           },
         },
@@ -163,6 +234,9 @@
       const content = document.getElementById("content");
       let currentFolder = fileSystem;
 
+      // ==============================
+      // AFFICHAGE DES DOSSIERS RACINE
+      // ==============================
       function renderFolders() {
         folderList.innerHTML = "";
         for (const folder in fileSystem) {
@@ -176,26 +250,51 @@
         }
       }
 
+      // ==============================
+      // AFFICHAGE DU CONTENU
+      // ==============================
       function renderContent(folder) {
         content.innerHTML = "";
+
         for (const name in folder) {
           const item = folder[name];
           const div = document.createElement("div");
           div.className = "file";
+
           const img = document.createElement("img");
+          img.src =
+            item.type === "folder"
+              ? "https://img.icons8.com/ios-filled/50/ffffff/folder-invoices.png"
+              : "https://img.icons8.com/ios-filled/50/ffffff/document.png";
+
           const span = document.createElement("span");
           span.textContent = name;
 
+          // 📁 Dossier
           if (item.type === "folder") {
-            img.src =
-              "https://img.icons8.com/ios-filled/50/ffffff/folder-invoices.png";
             div.addEventListener("dblclick", () => renderContent(item.content));
-          } else {
-            img.src = item.icon;
-            div.addEventListener("dblclick", () =>
-              alert(`Ouverture simulée de "${name}"`)
-            );
           }
+
+          // 📄 SEUL FICHIER INTERACTIF
+          if (item.type === "special" && name === "toto.txt") {
+            div.addEventListener("dblclick", () => {
+              alert(
+                `Etapes de la soudure:
+Pince
+Gaine
+Pince
+Pince
+Gaine
+Étain
+Gaine
+Fer à souder
+Gaine
+Fer à souder`
+              );
+            });
+          }
+
+          // ❌ Tous les autres fichiers → rien
 
           div.appendChild(img);
           div.appendChild(span);
@@ -203,7 +302,9 @@
         }
       }
 
-      // Initialisation
+      // ==============================
+      // INIT
+      // ==============================
       renderFolders();
       renderContent(currentFolder);
     </script>

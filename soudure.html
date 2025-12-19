@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Soudure</title>
-
+    <script src="js/inventory.js"></script>
     <style>
       body {
         margin: 0;
@@ -214,11 +214,17 @@
           if (targetId === expected) {
             step++;
             updateProgress();
-
             if (step === sequence.length) {
               progress.textContent = "🎉 Soudure terminée !";
               feedback.style.opacity = 0;
               console.log("🎉 Puzzle réussi !");
+
+              Inventory.addItem("cableR");
+
+              // Redirection vers le studio après un court délai (optionnel)
+              setTimeout(() => {
+                window.location.href = "studio.html";
+              }, 1000); // 1 seconde pour laisser le feedback
             }
           } else {
             resetGame();
