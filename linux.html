@@ -8,7 +8,7 @@
     <script src="js/script.js" defer></script>
 
     <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <style>
       body {
         margin: 0;
@@ -90,9 +90,31 @@
         font-size: 12px;
         word-wrap: break-word;
       }
+      .button {
+        position: absolute;
+        padding: 10px 20px;
+        font-size: 22px;
+        background-color: #000;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid #fff;
+        border-radius: 999px;
+        z-index: 1;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        transition: transform 0.2s ease-out, box-shadow 0.2s ease-out,
+          background-color 0.2s ease-out;
+      }
+      .button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
+          0 0 40px rgba(255, 255, 255, 0.4);
+        background-color: #111;
+      }
     </style>
   </head>
   <body>
+    <a class="button" href="03fallumé.html">Revenir dans la salle</a>
     <div id="desktop">
       <div id="explorer">
         <div id="folders">
@@ -101,8 +123,7 @@
         <div id="content"></div>
       </div>
     </div>
-    <div id="inventory-bar"></div>
-    <button id="add-item-button">Ajouter une banane</button>
+
     <script>
       // ==============================
       // SYSTÈME DE FICHIERS CHAOTIQUE
